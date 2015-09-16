@@ -1,0 +1,12 @@
+useDynLib(OBsMD)
+
+import(stats,graphics)
+importFrom("grDevices", "grey")
+
+export("OBsProb","OMD") 
+
+S3method(plot, OBsProb)
+S3method(print, OBsProb)
+S3method(print, OMD)
+S3method(summary, OBsProb)
+S3method(summary, OMD)
