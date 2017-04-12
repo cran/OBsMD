@@ -1,8 +1,7 @@
-
-	SUBROUTINE OBm(X,Y,N,COLS,abeta,bbeta,BLKS,MXFAC,MXINT,NTOP,
+	    SUBROUTINE OBm(X,Y,N,COLS,abeta,bbeta,BLKS,MXFAC,MXINT,NTOP,
      *omdcnt,optop,onftop,ojtop,oprob,osigtop,ind)
       
-	INTEGER N,COLS,BLKS,MXFAC,MXINT,NTOP,ind,contam,ef,t0,ti,
+      INTEGER N,COLS,BLKS,MXFAC,MXINT,NTOP,ind,contam,ef,t0,ti,
      *abeta,bbeta
       DOUBLE PRECISION Y(N),X(N,(COLS+BLKS))
 
@@ -11,31 +10,31 @@
 
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-C     Modification to the original program MBCQPI5 in order to implement 
-C     Objective Bayesian approach to Follow-up experiment
-C
-C     ind     Indicator variable, 1 subroutine exit properly
-C             otherwise it has the format label number.
+C	Modification to the original program MBCQPI5 in order to implement 
+C	Objective Bayesian approach to Follow-up experiment
+C	
+C	ind     Indicator variable, 1 subroutine exit properly
+C	        otherwise it has the format label number.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-C        PROGRAM MBCQPI5
-C        **********************************************************
-C        MBCQPI
-C        WRITTEN BY R DANIEL MEYER, THE LUBRIZOL CORPORATION,
-C        29400 LAKELAND BLVD, WICKLIFFE, OHIO 44092
-C        JUNE 1996
-C        **********************************************************
-C        WHILE MUCH TIME AND EFFORT HAS BEEN PUT INTO THE PRODUCTION
-C        OF RELIABLE SOURCE CODE, IT IS IMPOSSIBLE TO GUARANTEE THAT
-C        THE CODE IS ERROR FREE.  COMMENTS ON ERRORS, IRRITATIONS,
-C        SUGGESTIONS FOR IMPROVEMENT ARE WELCOMED.
-C        COPYRIGHT R DANIEL MEYER 1992
-C        **********************************************************
-C        THE FOLLOWING PARAMETER STATEMENT SHOULD BE EDITED
-C        IF YOU WISH TO INCREASE THE SIZE OF PROBLEM THAT CAN
-C        BE TACKLED, CHANGE INPUT/OUTPUT UNIT NUMBERS, OR
-C        CHANGE THE NUMBER OF LINES ON AN OUTPUT PAGE.
-C        THE PARAMETERS HAVE THE FOLLOWING DEFINITIONS:
+C     PROGRAM MBCQPI5
+C     **********************************************************
+C     MBCQPI
+C     WRITTEN BY R DANIEL MEYER, THE LUBRIZOL CORPORATION,
+C     29400 LAKELAND BLVD, WICKLIFFE, OHIO 44092
+C      JUNE 1996
+C      ********************************************************
+C       WHILE MUCH TIME AND EFFORT HAS BEEN PUT INTO THE PRODUCTION
+C       OF RELIABLE SOURCE CODE, IT IS IMPOSSIBLE TO GUARANTEE THAT
+C       THE CODE IS ERROR FREE.  COMMENTS ON ERRORS, IRRITATIONS,
+C       SUGGESTIONS FOR IMPROVEMENT ARE WELCOMED.
+C       COPYRIGHT R DANIEL MEYER 1992
+C       **********************************************************
+C       THE FOLLOWING PARAMETER STATEMENT SHOULD BE EDITED
+C       IF YOU WISH TO INCREASE THE SIZE OF PROBLEM THAT CAN
+C       BE TACKLED, CHANGE INPUT/OUTPUT UNIT NUMBERS, OR
+C       CHANGE THE NUMBER OF LINES ON AN OUTPUT PAGE.
+C       THE PARAMETERS HAVE THE FOLLOWING DEFINITIONS:
 C
 C        LS      NUMBER OF LINES ON AN OUTPUT PAGE
 C        MAXN    MAXIMUM NUMBER OF OBSERVATIONS
@@ -48,13 +47,13 @@ C                GREATER THAN BIG, ALL PROBABILITIES ARE SCALED BACK
 C                TO AVOID OVERFLOW
 C        MAXTERM MAXIMUM ORDER OF MODEL MATRIX
 C        MAXDIM  MAXIMUM NUMBER OF DISTINCT PROBABILITIES TO COMPUTE
-C	
+C
       
-	PARAMETER (LS=66,
+	    PARAMETER (LS=66,
      *           MAXN=100,
      *           MAXCOL=25,
      *           MAXGAM=20,
-     *           MAXNMD=300,             !100,
+     *           MAXNMD=300,             
      *           MXMXIN=3,
      *           BIG=1.0E10,
      *           MAXTERM=1+MAXCOL+MAXCOL*(MAXCOL-1)/2,
@@ -105,7 +104,7 @@ C        PINDEX  INTEGER VECTOR OF SORTED INDEXES OF PTOP
 C        MDCNT   TOTAL NUMBER OF MODELS EVALUATED
 C
       LOGICAL PART,ALL
-C
+
       DOUBLE PRECISION S,ZZ,
      *PI0, PMI0(MAXNMD),SUM,
      *MEAN,ROOTN,MXNORM,SUMNORM,DEL,COND,WCRIT,PSCAL,
@@ -116,16 +115,16 @@ C
      *Z(MAXTERM),PTOP(MAXNMD),SIGTOP(MAXNMD),PROB0,
      *BFI0(MAXNMD),QI0,P1,P2,P3,RE,IM,IPER,det(2),
      *coef1, coef2, coef3, coef4, coef5, coef6, coef7
-C
+
       INTEGER NTERM,NN,NFAC,M,I,J,K,II,BAR,OLOOP,
      *par1,par2,par3,par4,	 
      *OCOUNT,ISTART,INUNIT,OUNIT,NLOW,INFO,
      *MULT(MAXCOL),JFAC(MAXCOL),JTOP(MAXNMD,MAXCOL),NFTOP(MAXNMD),
      *PINDEX(MAXNMD),MDCNT
-C
-      CHARACTER*1 CC,ST,BL
-C
-C
+
+      CHARACTER(1) CC,ST,BL
+
+
 	
       INUNIT=5
       OUNIT=1 
@@ -145,23 +144,23 @@ C
 	    ind = 1502
         GO TO 700
       ENDIF
-C
+
       IF ((MXFAC .LT. 1) .OR. (MXFAC .GT. COLS)) THEN
 	    ind = 1503
         GO TO 700
       ENDIF
-C
+
       IF ((MXINT .LT. 1) .OR. (MXINT .GT. MXMXIN)) THEN
 	    ind = 1504
         GO TO 700
       ENDIF
-C
+
       IF ((MXINT .EQ. 3) .AND.
      & ((MXFAC*(MXFAC-1)*(MXFAC-2)/6) .GT. MAXTERM)) THEN
 	    ind = 1505
         GO TO 700
       ENDIF
-C
+
 
        IF ((NTOP .LT. 0) .OR. (NTOP .GT. MAXNMD)) THEN
          NTOP=MAXNMD
@@ -176,7 +175,6 @@ C
         PTOP(i) = -1.0D0
 52    continue
 	
-ccccccccccccccccccccccccccccccccccccccccccccc
 
       ST='*'
       BL=' '
@@ -184,36 +182,38 @@ ccccccccccccccccccccccccccccccccccccccccccccc
       MEAN=0.0
       S=0.0
       MDCNT=0
-	CONTAM=0
-	t0=1+blks
-	ef=0	   !if ef=1 we impose effect forcing; otherwise ef=0
+	    CONTAM=0
+	    t0=1+blks
+	    ef=0	   
 
       DO 15 I=1,NTOP
- 15     PINDEX(I)=I
-      DO 100 M=1,N
- 100     MEAN=MEAN+Y(M)                                                 
+        PINDEX(I)=I
+15      CONTINUE
+	    DO 100 M=1,N
+        MEAN=MEAN+Y(M)                                                 
+100   continue    
       MEAN=MEAN/FLOAT(N)
       DO 110 M=1,N                                                      
- 110   S=S+(Y(M)-MEAN)**2                                               
-
+        S=S+(Y(M)-MEAN)**2                                               
+110   continue
       DO 420 NFAC=0,MXFAC
          ALL= .FALSE.                                                   
-C                                                                       
+                                                                       
       CALL INITIA(JFAC,NFAC,MAXCOL)                                  
-C
+
  200  IF (.NOT. ALL) THEN
-C
+
 C     AUGMENT WITH INTERACTION COLUMNS                                  
-C     
-		                                                                  
+     		                                                                  
       MDCNT=MDCNT+1
       DO 210 I=1,N                                                      
-       A(I,1)=1.0                                                       
+       A(I,1)=1.0                                                            
       DO 205 J=1,BLKS                                                   
- 205   A(I,J+1)=X(I,J)
+        A(I,J+1)=X(I,J)
+205   continue
       DO 210 J=1,NFAC
- 210   A(I,BLKS+J+1)=X(I,BLKS+JFAC(J))
-
+        A(I,BLKS+J+1)=X(I,BLKS+JFAC(J))
+210   continue
       NTERM=NFAC+1+BLKS                                                 
 
       DO 250 M=2,MIN(MXINT,NFAC)
@@ -222,123 +222,125 @@ C
  220     IF (.NOT. PART) THEN                                           
            NTERM=NTERM+1                                                
            DO 230 I=1,N                                                 
- 230         A(I,NTERM)=A(I,MULT(1)+1+BLKS)*A(I,MULT(2)+1+BLKS)
-           DO 240 II=3,M
+              A(I,NTERM)=A(I,MULT(1)+1+BLKS)*A(I,MULT(2)+1+BLKS)
+ 230       continue
+		  DO 240 II=3,M
              DO 240 I=1,N
- 240           A(I,NTERM)=A(I,NTERM)*A(I,MULT(II)+1+BLKS)
-           CALL INCREM(MULT,PART,M,NFAC,MAXCOL)
+            A(I,NTERM)=A(I,NTERM)*A(I,MULT(II)+1+BLKS)
+ 240       continue
+		  CALL INCREM(MULT,PART,M,NFAC,MAXCOL)
            GO TO 220
-	ENDIF		   	                                                            
+      ENDIF		   	                                                            
  250  CONTINUE
-	
-	
 
-C
 C      FORM X-PRIME-X MATRIX
-C
+
 	
       NN=MIN(NTERM,N)
-	IF (NN.LT.N) then
+	    IF (NN.LT.N) then
  255  DO 270 I=1,NN                                                  
       DO 270 J=I,NN
 		        AA(I,J)=0.0
         DO 260 M=1,N                                                    
- 260      AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
-       ATEM(I,J)=AA(I,J)
-       ATEM(J,I)=AA(I,J)
- 270    AA(J,I)=AA(I,J)
+         AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
+ 260    continue  
+        ATEM(I,J)=AA(I,J)
+        ATEM(J,I)=AA(I,J)
+        AA(J,I)=AA(I,J)
+270   continue
 
-
-           DO 280 I=1,NN
-          DO 280 J=1,NN
- 280        AA(I,J)=ATEM(I,J)
-
+      DO 280 I=1,NN
+      DO 280 J=1,NN
+          AA(I,J)=ATEM(I,J)
+280   continue 
       DO 320 I=1,NN
         B(I)=0.0                                                        
         DO 320 M=1,N                                                    
- 320      B(I)=B(I)+A(M,I)*Y(M) 
-	
+          B(I)=B(I)+A(M,I)*Y(M) 
+ 320	continue
                                          
       CALL DPOCO(AA,MAXTERM,NN,COND,Z,INFO)
 
-	IF (info.ne.0) THEN                                    
-	IF (ef.eq.1) then  
+	    IF (info.ne.0) THEN                                    
+	    IF (ef.eq.1) then  
 			GO TO 400
-	else
+	    else
 			NN=NN-1
 			go to 255
-	ENDIF 
-	ENDIF
+	    ENDIF 
+	    ENDIF
 	
-	DO 271 I=1,NN
-	DO 271 J=1,NN
-271	ATEM(I,J)=AA(I,J)                       
+      DO 271 I=1,NN
+	    DO 271 J=1,NN
+	    ATEM(I,J)=AA(I,J)                       
+271   continue
 
-	CALL DPODI(ATEM, MAXTERM,NN,DET,10)
-	IF (DET(2).LT. -3) THEN                                    
-	IF (ef.eq.1) then  
+	    CALL DPODI(ATEM, MAXTERM,NN,DET,10)
+	    IF (DET(2).LT. -3) THEN                                    
+	    IF (ef.eq.1) then  
 			GO TO 400
-	else
-			NN=NN-1
+	    else
+			 NN=NN-1
 			go to 255
-	ENDIF                                                   
-	ENDIF
+	    ENDIF                                                   
+	    ENDIF
 					
       CALL DPOSL(AA,MAXTERM,NN,B)
 		
 
-	SR=0.0                                                            
+	    SR=0.0                                                            
       SR2=0.0
       DO 340 M=1,N                                                      
         RES(M)=Y(M)
        DO 330 I=1,NN                                                 
- 330    RES(M)=RES(M)-A(M,I)*B(I)
- 340     SR2=SR2+RES(M)**2
-	If (mdcnt.eq.1) then 
-	s=SR2
-	endif 
-	QI0=SR2/S
-		ti=nn-t0
-	    SIGMA(MDCNT)=SR2/(N-NN)	
-		ZZ=(1-QI0**(-1))*(ti+t0)/(N+1)
-		P1=(ti+1)/2.
-		P2=(N-t0)/2.
-		P3=(ti+3)/2.
-		CALL HYP(ZZ,P1,P2,P3,RE,IM)
-		IF (IM.EQ.0) THEN
-			IPER=RE
-		ELSE
-C			WRITE(*,*) "Hypergeometric function is not real", MDCNT
-		ENDIF
+        RES(M)=RES(M)-A(M,I)*B(I)
+ 330   continue
+         SR2=SR2+RES(M)**2
+ 340   continue
+	    If (mdcnt.eq.1) then 
+	    s=SR2
+	    endif 
+	    QI0=SR2/S
+       ti=nn-t0
+          SIGMA(MDCNT)=SR2/(N-NN)	
+		  ZZ=(1-QI0**(-1))*(ti+t0)/(N+1)
+	    P1=(ti+1)/2.
+	    P2=(N-t0)/2.
+	    P3=(ti+3)/2.
+		  CALL HYP(ZZ,P1,P2,P3,RE,IM)
+		  IF (IM.EQ.0) THEN
+			 IPER=RE
+       ENDIF
 
-	coef1=(N+1.0D0)
-	coef5=(ti+t0)	
-	coef2=(-(ti)/2.0D0)
-	coef3=(-(N-t0)/2.0D0)
-	coef4=(ti+1.0D0)
-	coef6=(coef1**(coef2))
-	coef7=((coef5)**(-coef2))
-	BFI0(MDCNT)=coef6*coef7*(QI0**(coef3))
-     & 	/coef4*IPER
-	ELSE
-		do 323 i=1,nterm
-323	b(i)=0.0
-		BFI0(MDCNT)=0.0D0
-		CONTAM=CONTAM+1
-	ENDIF
+      coef1=(N+1.0D0)
+      coef5=(ti+t0)	
+      coef2=(-(ti)/2.0D0)
+      coef3=(-(N-t0)/2.0D0)
+      coef4=(ti+1.0D0)
+      coef6=(coef1**(coef2))
+      coef7=((coef5)**(-coef2))
+	    BFI0(MDCNT)=coef6*coef7*(QI0**(coef3))
+     * 	/coef4*IPER
+	    ELSE
+		  do 323 i=1,nterm
+      	b(i)=0.0
+323	    continue 
+		  BFI0(MDCNT)=0.0D0
+		  CONTAM=CONTAM+1
+	    ENDIF
 		
-	par1=abeta+nfac-1
-	par2=bbeta+cols-nfac-1
-	par3=abeta-1
-	par4=bbeta+cols-1
+       par1=abeta+nfac-1
+	     par2=bbeta+cols-nfac-1
+	     par3=abeta-1
+	     par4=bbeta+cols-1
 
-	CALL Fact(par1,par1f)
-	CALL Fact(par2,par2f)
-	CALL Fact(par3,par3f)
-	CALL Fact(par4,par4f)
-	PI0=(par1f*par2f)/(par3f*par4f)
+	    CALL Fact(par1,par1f)
+	    CALL Fact(par2,par2f)
+	    CALL Fact(par3,par3f)
+	    CALL Fact(par4,par4f)
+	    PI0=(par1f*par2f)/(par3f*par4f)
 
-	PMI0(MDCNT)=PI0*BFI0(MDCNT)
+	    PMI0(MDCNT)=PI0*BFI0(MDCNT)
             WCRIT=PSCAL*BIG
 
 		  CALL IDLOW(PTOP,MAXNMD,NTOP,NLOW,WCRIT)
@@ -348,11 +350,13 @@ C			WRITE(*,*) "Hypergeometric function is not real", MDCNT
 				SIGTOP(NLOW)=SIGMA(MDCNT)
 				NFTOP(NLOW)=NFAC
 				DO 355 I=1,NFAC
- 355					JTOP(NLOW,I)=JFAC(I)
+ 					JTOP(NLOW,I)=JFAC(I)
+ 355              continue
 			ENDIF
 
 	      DO 360 I=1,NFAC
- 360          PROB(JFAC(I))=PROB(JFAC(I))+PMI0(MDCNT)
+               PROB(JFAC(I))=PROB(JFAC(I))+PMI0(MDCNT)
+ 360        continue   
 			IF(NFAC.EQ.0) then
 				PROB0=PMI0(1)
 			endif 
@@ -362,14 +366,14 @@ C			WRITE(*,*) "Hypergeometric function is not real", MDCNT
       ENDIF
  420  CONTINUE
 	
-	SUM=0.0D0
-	DO 444 i=2,MDCNT
- 444	SUM=SUM+PMI0(i)
-
+	    SUM=0.0D0
+	    DO 444 i=2,MDCNT
+	    SUM=SUM+PMI0(i)
+ 444  continue 
 	
-	DO 446 I=1,MDCNT 
- 446	PMI0(I)=PMI0(I)/(1.0D0+SUM) 
-	
+	    DO 446 I=1,MDCNT 
+ 	    PMI0(I)=PMI0(I)/(1.0D0+SUM) 
+ 446	continue 
 
       OCOUNT=OCOUNT+1
       OCOUNT=MOD(OCOUNT,LS)
@@ -377,8 +381,9 @@ C			WRITE(*,*) "Hypergeometric function is not real", MDCNT
       IF (COLS .GT. 15) CALL OSPACE(LS,OCOUNT,2*N+3,CC)
       CALL OSPACE(LS,OCOUNT,N+3,CC)
       CALL OSPACE(LS,OCOUNT,6,CC)
-        DO 545 I=1,NTOP
-545      PTOP(I)=PTOP(I)/(1.D0+SUM)
+         DO 545 I=1,NTOP
+          PTOP(I)=PTOP(I)/(1.D0+SUM)
+ 545     continue 
           CALL SSORT(PTOP,PINDEX,NTOP,-2)
         IF (NTOP .GT. MDCNT) NTOP=MDCNT
         CALL OSPACE(LS,OCOUNT,NTOP+4,CC)
@@ -387,21 +392,22 @@ C			WRITE(*,*) "Hypergeometric function is not real", MDCNT
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 C Whatever is printed is an output subroutine parameter
       omdcnt = MDCNT
-C     odel = DEL
       do 450 i = 1,NTOP
         optop(i) = PTOP(i)
         osigtop(i) = SIGTOP(PINDEX(i))
        onftop(i) = NFTOP(PINDEX(i))
         do 451 j= 1,MXFAC
-451        ojtop(i,j)=0
+           ojtop(i,j)=0
+451     continue 
         do 452 j= 1,NFTOP(PINDEX(i))
-452        ojtop(i,j) = JTOP(PINDEX(I),J)
+            ojtop(i,j) = JTOP(PINDEX(I),J)
+452     continue 
 450   continue
-		oprob(1)=prob0/(1.D0+sum)
+		  oprob(1)=prob0/(1.D0+sum)
       do 459 i = 1, cols
-459      oprob(i+1) = prob(i)/(1.D0+sum)
+        oprob(i+1) = prob(i)/(1.D0+sum)
+459   continue 
 
-ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       ind = 1
 
@@ -409,7 +415,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       
 
-	CLOSE(OUNIT)
+	    CLOSE(OUNIT)
 
  1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
      &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
@@ -475,16 +481,16 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       END
 
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C
-	SUBROUTINE FACT(INPUT,OUTPUT)
-	INTEGER input,i
-	DOUBLE PRECISION output
-	output=1
-	do  i=2,input
-	output=output*i
-	end do 
-	return
-	end
+
+	    SUBROUTINE FACT(INPUT,OUTPUT)
+	    INTEGER input,i
+	    DOUBLE PRECISION output
+	    output=1
+	    do  i=2,input
+	    output=output*i
+	    end do 
+	    return
+	    end
 
 
       SUBROUTINE IDLOW(PTOP,MAXNMD,NTOP,K,P)
@@ -498,10 +504,10 @@ C
  10   CONTINUE
       RETURN
       END
-C
+
       SUBROUTINE OSPACE(LS,OCOUNT,K,CC)
       INTEGER OCOUNT,K
-      CHARACTER*1 CC
+      CHARACTER(1) CC
       IF (((LS-OCOUNT) .LT. K) .AND. (K .LT. LS)) THEN
         OCOUNT=K
         CC='1'
@@ -511,13 +517,13 @@ C
       ENDIF                                                             
       RETURN                                                            
       END                                                               
-C
-C                                                                       
+
+                                                                       
       SUBROUTINE INCREM(J,ALL,R,N,MAXCOL)                               
-C                                                                       
+                                                                       
 C       INCREMENTS THE INTEGER VECTOR J TO THE NEXT VECTOR IN           
 C       LEXICAL ORDER
-C                                                                       
+                                                                       
       INTEGER M,L,R,N,J(MAXCOL)                                         
       LOGICAL OK,ALL                                                    
       L=R                                                               
@@ -527,7 +533,8 @@ C
          IF (J(L) .LT. N-R+L) THEN                                      
             J(L)=J(L)+1
             DO 101 M=L+1,R                                              
- 101          J(M)=J(M-1)+1
+              J(M)=J(M-1)+1
+ 101        continue
             OK=.TRUE.                                                   
          ELSE                                                           
             L=L-1                                                       
@@ -537,24 +544,26 @@ C
       IF (L .LE. 0) ALL=.TRUE.                                          
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
       SUBROUTINE INITIA(J,R,MAXCOL)                                     
-C                                                                       
+                                                                       
 C       INITIATES THE INTEGER VECTOR J TO THE FIRST VALUE               
 C       IN LEXICAL ORDER (1,2,3,...,R)                                  
-C                                                                       
+                                                                       
         INTEGER J(MAXCOL),R,I                                           
          DO 401 I=1,R                                                   
- 401        J(I)=I                                                      
+            J(I)=I                                                      
+ 401     continue   
          DO 402 I=R+1,MAXCOL                                            
- 402        J(I)=0
+         J(I)=0
+ 402     continue
       RETURN                                                            
       END
 	                                                           
                                                                   
       SUBROUTINE DPOCO(A,LDA,N,RCOND,Z,INFO)
       INTEGER LDA,N,INFO                                                
-      DOUBLE PRECISION A(LDA,1),Z(1)                                    
+      DOUBLE PRECISION A(LDA,N),Z(N)                                    
       DOUBLE PRECISION RCOND                                            
 C                                                                       
 C     DPOCO FACTORS A DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE      
@@ -623,10 +632,10 @@ C
       DOUBLE PRECISION DDOT,EK,T,WK,WKM
       DOUBLE PRECISION ANORM,S,DASUM,SM,YNORM                           
       INTEGER I,J,JM1,K,KB,KP1                                          
-C                                                                       
-C                                                                       
+                                                                       
+                                                                       
 C     FIND NORM OF A USING ONLY UPPER HALF                              
-C                                                                       
+                                                                       
       DO 30 J = 1, N                                                    
          Z(J) = DASUM(J,A(1,J),1)                                       
          JM1 = J - 1                                                    
@@ -640,10 +649,10 @@ C
       DO 40 J = 1, N                                                    
          ANORM = DMAX1(ANORM,Z(J))                                      
    40 CONTINUE                                                          
-C
+
 C     FACTOR                                                            
-C                                                                       	
-	CALL DPOFA(A,LDA,N,INFO)                                          
+                                                                       	
+      CALL DPOFA(A,LDA,N,INFO)                                          
       IF (INFO .NE. 0) GO TO 180
 C                                                                       
 C        RCOND = 1/(NORM(A)*(ESTIMATE OF NORM(INVERSE(A)))) .
@@ -690,9 +699,9 @@ C
   110    CONTINUE                                                       
          S = 1.0D0/DASUM(N,Z,1)                                         
          CALL DSCAL(N,S,Z,1)                                            
-C                                                                       
+                                                                       
 C        SOLVE R*Y = W                                                  
-C                                                                       
+                                                                       
          DO 130 KB = 1, N
             K = N + 1 - KB                                              
             IF (DABS(Z(K)) .LE. A(K,K)) GO TO 120                       
@@ -705,11 +714,11 @@ C
   130    CONTINUE                                                       
          S = 1.0D0/DASUM(N,Z,1)                                         
          CALL DSCAL(N,S,Z,1)                                            
-C                                                                       
+                                                                       
          YNORM = 1.0D0
-C                                                                       
+                                                                       
 C        SOLVE TRANS(R)*V = Y                                           
-C                                                                       
+                                                                       
          DO 150 K = 1, N
             Z(K) = Z(K) - DDOT(K-1,A(1,K),1,Z(1),1)                     
             IF (DABS(Z(K)) .LE. A(K,K)) GO TO 140
@@ -722,9 +731,9 @@ C
          S = 1.0D0/DASUM(N,Z,1)                                         
          CALL DSCAL(N,S,Z,1)                                            
          YNORM = S*YNORM                                                
-C                                                                       
+                                                                       
 C        SOLVE R*Z = V                                                  
-C                                                                       
+                                                                       
          DO 170 KB = 1, N                                               
             K = N + 1 - KB                                              
             IF (DABS(Z(K)) .LE. A(K,K)) GO TO 160                       
@@ -736,20 +745,19 @@ C
             T = -Z(K)                                                   
             CALL DAXPY(K-1,T,A(1,K),1,Z(1),1)                           
   170    CONTINUE                                                       
-C        MAKE ZNORM = 1.0                                               
          S = 1.0D0/DASUM(N,Z,1)                                         
          CALL DSCAL(N,S,Z,1)                                            
          YNORM = S*YNORM                                                
-C
+
          IF (ANORM .NE. 0.0D0) RCOND = YNORM/ANORM                      
          IF (ANORM .EQ. 0.0D0) RCOND = 0.0D0                            
   180 CONTINUE                                                          
       RETURN                                                            
       END                                                               
       
-	SUBROUTINE DPODI(A,LDA,N,DET,JOB)                                 
+	    SUBROUTINE DPODI(A,LDA,N,DET,JOB)                                 
       INTEGER LDA,N,JOB
-      DOUBLE PRECISION A(LDA,1)                                         
+      DOUBLE PRECISION A(LDA,N)                                         
       DOUBLE PRECISION DET(2)                                           
 C                                                                       
 C     DPODI COMPUTES THE DETERMINANT AND INVERSE OF A CERTAIN
@@ -810,9 +818,9 @@ C
       DOUBLE PRECISION T                                                
       DOUBLE PRECISION S                                                
       INTEGER I,J,JM1,K,KP1                                             
-C                                                                       
+                                                                       
 C     COMPUTE DETERMINANT                                               
-C                                                                       
+                                                                       
       IF (JOB/10 .EQ. 0) GO TO 70                                       
          DET(1) = 1.0D0                                                 
          DET(2) = 0.0D0                                                 
@@ -834,9 +842,9 @@ C        ...EXIT
    50    CONTINUE                                                       
    60    CONTINUE                                                       
    70 CONTINUE                                                          
-C                                                                       
+                                                                       
 C     COMPUTE INVERSE(R)
-C                                                                       
+                                                                       
       IF (MOD(JOB,10) .EQ. 0) GO TO 140                                 
          DO 100 K = 1, N                                                
             A(K,K) = 1.0D0/A(K,K)                                       
@@ -851,9 +859,9 @@ C
    80       CONTINUE                                                    
    90       CONTINUE                                                    
   100    CONTINUE                                                       
-C
+
 C        FORM  INVERSE(R) * TRANS(INVERSE(R))
-C                                                                       
+                                                                       
          DO 130 J = 1, N                                                
             JM1 = J - 1                                                 
             IF (JM1 .LT. 1) GO TO 120                                   
@@ -872,7 +880,7 @@ C
 
       SUBROUTINE DPOSL(A,LDA,N,B)                                       
       INTEGER LDA,N                                                     
-      DOUBLE PRECISION A(LDA,1),B(1)                                    
+      DOUBLE PRECISION A(LDA,N),B(N)                                    
 C
 C     DPOSL SOLVES THE DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE     
 C     SYSTEM A * X = B                                                  
@@ -923,16 +931,16 @@ C     INTERNAL VARIABLES
 C                                                                       
       DOUBLE PRECISION DDOT,T                                           
       INTEGER K,KB                                                      
-C                                                                       
+                                                                       
 C     SOLVE TRANS(R)*Y = B                                              
-C                                                                       
+                                                                       
       DO 10 K = 1, N                                                    
          T = DDOT(K-1,A(1,K),1,B(1),1)                                  
          B(K) = (B(K) - T)/A(K,K)                                       
    10 CONTINUE                                                          
-C                                                                       
+                                                                       
 C     SOLVE R*X = Y
-C                                                                       
+                                                                       
       DO 20 KB = 1, N                                                   
          K = N + 1 - KB
          B(K) = B(K)/A(K,K)                                             
@@ -941,10 +949,10 @@ C
    20 CONTINUE
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
       SUBROUTINE DPOFA(A,LDA,N,INFO)                                    
       INTEGER LDA,N,INFO                                                
-      DOUBLE PRECISION A(LDA,1)                                         
+      DOUBLE PRECISION A(LDA,N)                                         
 C
 C     DPOFA FACTORS A DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE      
 C     MATRIX.                                                           
@@ -991,8 +999,8 @@ C
       DOUBLE PRECISION S                                                
       INTEGER J,JM1,K                                                   
 C     BEGIN BLOCK WITH ...EXITS TO 40                                   
-C
-C                                                                       
+
+                                                                       
          DO 30 J = 1, N                                                 
             INFO = J                                                    
             S = 0.0D0
@@ -1014,19 +1022,19 @@ C       ....EXIT
    40 CONTINUE
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
       DOUBLE PRECISION FUNCTION DASUM(N,DX,INCX)                        
-C                                                                       
+                                                                       
 C     RETURNS SUM OF MAGNITUDES OF DOUBLE PRECISION DX.                 
 C     DASUM = SUM FROM 0 TO N-1 OF DABS(DX(1+I*INCX))                   
-C                                                                       
-      DOUBLE PRECISION DX(1)                                            
+                                                                       
+      DOUBLE PRECISION DX(N)                                            
       DASUM = 0.D0                                                      
       IF(N.LE.0)RETURN                                                  
       IF(INCX.EQ.1)GOTO 20                                              
-C
+
 C        CODE FOR INCREMENTS NOT EQUAL TO 1.
-C                                                                       
+                                                                       
       NS = N*INCX                                                       
           DO 10 I=1,NS,INCX                                             
           DASUM = DASUM + DABS(DX(I))                                   
@@ -1051,22 +1059,34 @@ C
    50 CONTINUE                                                          
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
 
       SUBROUTINE DAXPY(N,DA,DX,INCX,DY,INCY)                            
-C                                                                       
+                                                                       
 C     OVERWRITE DOUBLE PRECISION DY WITH DOUBLE PRECISION DA*DX + DY.   
 C     FOR I = 0 TO N-1, REPLACE  DY(LY+I*INCY) WITH DA*DX(LX+I*INCX) +  
 C       DY(LY+I*INCY), WHERE LX = 1 IF INCX .GE. 0, ELSE LX = (-INCX)*N,
 C       AND LY IS DEFINED IN A SIMILAR WAY USING INCY.
-C                                                                       
-      DOUBLE PRECISION DX(1),DY(1),DA                                   
+                                                                       
+      DOUBLE PRECISION DX(N),DY(N),DA                                   
       IF(N.LE.0.OR.DA.EQ.0.D0) RETURN                                   
-      IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60                               
+      
+      IF(INCX.EQ.INCY) THEN
+      	 IF((INCX-1).LT.0) THEN 
+      	    GO TO 5
+      	 ELSE IF  ((INCX-1).EQ.0) THEN 
+      		GO TO 20
+      	 ELSE 
+      		GO TO 60
+      	 ENDIF
+      ELSE
+      GO TO 5	 
+      ENDIF
+	 	                                 
     5 CONTINUE                                                          
-C                                                                       
+                                                                       
 C        CODE FOR NONEQUAL OR NONPOSITIVE INCREMENTS.                   
-C                                                                       
+                                                                       
       IX = 1                                                            
       IY = 1                                                            
       IF(INCX.LT.0)IX = (-N+1)*INCX + 1                                 
@@ -1097,9 +1117,9 @@ C
         DY(I + 3) = DY(I + 3) + DA*DX(I + 3)                            
    50 CONTINUE                                                          
       RETURN                                                            
-C                                                                       
+                                                                       
 C        CODE FOR EQUAL, POSITIVE, NONUNIT INCREMENTS.                  
-C                                                                       
+                                                                       
    60 CONTINUE                                                          
       NS = N*INCX                                                       
           DO 70 I=1,NS,INCX                                             
@@ -1107,22 +1127,34 @@ C
    70     CONTINUE
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
       DOUBLE PRECISION FUNCTION DDOT(N,DX,INCX,DY,INCY)                 
-C                                                                       
+                                                                       
 C     RETURNS THE DOT PRODUCT OF DOUBLE PRECISION DX AND DY.            
 C     DDOT = SUM FOR I = 0 TO N-1 OF  DX(LX+I*INCX) * DY(LY+I*INCY)     
 C     WHERE LX = 1 IF INCX .GE. 0, ELSE LX = (-INCX)*N, AND LY IS       
 C     DEFINED IN A SIMILAR WAY USING INCY.                              
-C                                                                       
-      DOUBLE PRECISION DX(1),DY(1)
+                                                                       
+      DOUBLE PRECISION DX(N),DY(N)
       DDOT = 0.D0                                                       
-      IF(N.LE.0)RETURN                                                  
-      IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60                               
+      IF(N.LE.0)RETURN 
+	                                                 
+      IF(INCX.EQ.INCY) THEN
+      	 IF((INCX-1).LT.0) THEN 
+      	    GO TO 5
+      	 ELSE IF  ((INCX-1).EQ.0) THEN 
+      		GO TO 20
+      	 ELSE 
+      		GO TO 60
+      	 ENDIF
+      ELSE
+      GO TO 5	 
+      ENDIF
+
     5 CONTINUE                                                          
-C
+
 C         CODE FOR UNEQUAL OR NONPOSITIVE INCREMENTS.                   
-C                                                                       
+                                                                       
       IX = 1                                                            
       IY = 1                                                            
       IF(INCX.LT.0)IX = (-N+1)*INCX + 1                                 
@@ -1133,12 +1165,12 @@ C
         IY = IY + INCY
    10 CONTINUE                                                          
       RETURN                                                            
-C                                                                       
+                                                                       
 C        CODE FOR BOTH INCREMENTS EQUAL TO 1.                           
-C                                                                       
-C                                                                       
+                                                                       
+                                                                       
 C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 5.
-C                                                                       
+                                                                       
    20 M = MOD(N,5)                                                      
       IF( M .EQ. 0 ) GO TO 40                                           
       DO 30 I = 1,M                                                     
@@ -1151,9 +1183,9 @@ C
      1   DX(I + 2)*DY(I + 2) + DX(I + 3)*DY(I + 3) + DX(I + 4)*DY(I + 4)
    50 CONTINUE                                                          
       RETURN
-C                                                                       
+                                                                      
 C         CODE FOR POSITIVE EQUAL INCREMENTS .NE.1.                     
-C                                                                       
+                                                                       
    60 CONTINUE                                                          
       NS = N*INCX                                                       
           DO 70 I=1,NS,INCX                                             
@@ -1163,27 +1195,27 @@ C
       END
 C                                                                       
       SUBROUTINE DSCAL(N,DA,DX,INCX)                                    
-C                                                                       
+                                                                       
 C     REPLACE DOUBLE PRECISION DX BY DOUBLE PRECISION DA*DX.            
 C     FOR I = 0 TO N-1, REPLACE DX(1+I*INCX) WITH  DA * DX(1+I*INCX)    
-C                                                                       
-      DOUBLE PRECISION DA,DX(1)
+                                                                       
+      DOUBLE PRECISION DA,DX(N)
       IF(N.LE.0)RETURN                                                  
       IF(INCX.EQ.1)GOTO 20                                              
-C                                                                       
+                                                                       
 C        CODE FOR INCREMENTS NOT EQUAL TO 1.                            
-C                                                                       
+                                                                       
       NS = N*INCX                                                       
           DO 10 I = 1,NS,INCX
           DX(I) = DA*DX(I)                                              
    10     CONTINUE
       RETURN                                                            
-C                                                                       
+                                                                       
 C        CODE FOR INCREMENTS EQUAL TO 1.                                
-C                                                                       
-C                                                                       
+                                                                       
+                                                                       
 C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 5.   
-C                                                                       
+                                                                       
    20 M = MOD(N,5)
       IF( M .EQ. 0 ) GO TO 40                                           
       DO 30 I = 1,M                                                     
@@ -1200,7 +1232,7 @@ C
    50 CONTINUE                                                          
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
       SUBROUTINE SSORT(X,Y,N,KFLAG)                                     
 C***BEGIN PROLOGUE   SSORT                                              
 C***REVISION  OCTOBER 1,1980                                            
@@ -1258,20 +1290,25 @@ C***FIRST EXECUTABLE STATEMENT    SSORT
       NN = N                                                            
       IF (NN.GE.1) GO TO 10                                             
 C     CALL XERROR (58HSSORT- THE NUMBER OF VALUES TO BE SORTED WAS NOT P
-C    1OSITIVE.,58,1,1)                                                  
+C     1OSITIVE.,58,1,1)                                                  
       RETURN                                                            
    10 KK = IABS(KFLAG)                                                  
       IF ((KK.EQ.1).OR.(KK.EQ.2)) GO TO 15
 C     CALL XERROR (62HSSORT- THE SORT CONTROL PARAMETER, K, WAS NOT 2, 1
-C    1, -1, OR -2.,62,2,1)                                              
+C     1, -1, OR -2.,62,2,1)                                              
       RETURN                                                            
 C                                                                       
 C ALTER ARRAY X TO GET DECREASING ORDER IF NEEDED                       
 C                                                                       
    15 IF (KFLAG.GE.1) GO TO 30
       DO 20 I=1,NN                                                      
-   20 X(I) = -X(I)                                                      
-   30 GO TO (100,200),KK                                                
+      X(I) = -X(I)
+   20 continue   
+   30 IF(kk.eq.1) then
+         go to 100
+	    else if(kk.eq.2) then
+	    go to 200
+	    endif                                                       
 C                                                                       
 C SORT X ONLY                                                           
 C                                                                       
@@ -1459,7 +1496,8 @@ C CLEAN UP
 C
   300 IF (KFLAG.GE.1) RETURN
       DO 310 I=1,NN
-  310 X(I) = -X(I)
+          X(I) = -X(I)
+  310 continue   
       RETURN
       END
 
@@ -1506,10 +1544,10 @@ c***********************************************************************
 
       subroutine hyp(z,a,b,c,re,im)
 
-      real*8  zero,one,two,half
+      DOUBLE PRECISION  zero,one,two,half
       parameter (zero=0.d0,one=1.d0,two=2.d0,half=0.5d0)
       integer flag,flag2,neps
-      real*8   a,b,c,z,w,f,f1,f2,gamm,tol,test,pi,machep,re2,
+      DOUBLE PRECISION   a,b,c,z,w,f,f1,f2,gamm,tol,test,pi,machep,re2,
      #         alpha0,alpha1,rn,binom,eps,re,im,x1,x2,x3,x4,
      #         coeff1,coeff2,coeff3,coeff4,temp1,temp2,term,
      #         a1,b1,c1,a2,b2,c2,alpha2
@@ -1919,7 +1957,8 @@ c***********************************************************************
       implicit none
       integer i,m,n,nmax,k,k0,k1
       parameter (nmax=100)
-      real*8  a,b,c,w,f,alpha0,alpha1,rn,gamm,term,machep,binom
+      DOUBLE PRECISION  a,b,c,w,f,alpha0,alpha1,rn,gamm,term,machep,
+     *binom
       common /bcoeff/binom(5151)
 
 c  compute the number of sums needed to get good convergence
@@ -1991,9 +2030,9 @@ c***********************************************************************
 
       function gamm(x)
 
-      real*8  zero,one
+      DOUBLE PRECISION  zero,one
       parameter(zero=0.d0,one=1.d0)
-      real*8  x,xx,coeff,gamm,g
+      DOUBLE PRECISION  x,xx,coeff,gamm,g
 
 c  scale input variable and change it's name
 c  so that it does not get destroyed
@@ -2040,9 +2079,9 @@ c***********************************************************************
 
       function g(xx)
 
-      real*8  zero,one,two
+      DOUBLE PRECISION  zero,one,two
       parameter (zero=0.d0,one=1.d0,two=2.d0)
-      real*8  c(0:41),xx,y,y1,y2,g
+      DOUBLE PRECISION  c(0:41),xx,y,y1,y2,g
 
 c  use clenshaw recurrence scheme with tchebychev polynomials
 c  and the expansion coefficients tabulated in 'cheb' for 0<xx<1 .
@@ -2096,11 +2135,11 @@ c***********************************************************************
 
       subroutine fix1(a,b,c,n,k,f,w,machep,eps)
 
-      real*8  zero,one,two,four,eighth,seven,eight,sxteen
+      DOUBLE PRECISION  zero,one,two,four,eighth,seven,eight,sxteen
       parameter (zero=0.d0,one=1.d0,two=2.d0,four=4.d0,eighth=1.d0/8.d0,
      #           seven=7.d0,eight=8.d0,sxteen=16.d0,nmax=100)
-      real*8   a,b,c,w,f,eps,gamm,machep,test,arg,rn,sum,et1,et2,
-     #         term1,term2,term3,term4,term5,term6,term7,term8,
+      DOUBLE PRECISION   a,b,c,w,f,eps,gamm,machep,test,arg,rn,sum,et1,
+     #         et2,term1,term2,term3,term4,term5,term6,term7,term8,
      #         temp,temp1,temp2,temp3,temp4,temp5,temp6,temp7,
      #         coeff,coeff1,coeff2,coeff3,coeff4,x,x1,x2,x3,x4,
      #         t1(0:80),t2(0:80),t3(0:80),t4(0:80),c1(0:80),c2(0:80),
@@ -2650,11 +2689,11 @@ c***********************************************************************
 
       subroutine fix4a(a,b,c,n,k,f,w,machep,eps)
 
-      real*8  zero,one,two,four,eighth,seven,eight,sxteen
+      DOUBLE PRECISION  zero,one,two,four,eighth,seven,eight,sxteen
       parameter (zero=0.d0,one=1.d0,two=2.d0,four=4.d0,eighth=1.d0/8.d0,
      #           seven=7.d0,eight=8.d0,sxteen=16.d0,nmax=100)
-      real*8   a,b,c,w,f,gamm,eps,machep,test,arg,rn,sum,et1,et2,
-     #         term1,term2,term3,term4,term5,term6,term7,term8,
+      DOUBLE PRECISION   a,b,c,w,f,gamm,eps,machep,test,arg,rn,sum,et1,
+     #         et2,term1,term2,term3,term4,term5,term6,term7,term8,
      #         temp,temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8,
      #         coeff,coeff1,coeff2,coeff3,coeff4,x,x1,x2,x3,x4,
      #         t1(0:80),t2(0:80),t3(0:80),t4(0:80),c1(0:80),c2(0:80),
@@ -3152,11 +3191,11 @@ c***********************************************************************
 
       subroutine fix4b(a,b,c,n,k,f,w,machep,eps)
 
-      real*8  zero,one,two,four,eighth,seven,eight,sxteen
+      DOUBLE PRECISION  zero,one,two,four,eighth,seven,eight,sxteen
       parameter (zero=0.d0,one=1.d0,two=2.d0,four=4.d0,eighth=1.d0/8.d0,
      #           seven=7.d0,eight=8.d0,sxteen=16.d0,nmax=100)
-      real*8   a,b,c,w,f,gamm,eps,machep,test,arg,rn,sum,et1,et2,
-     #         term1,term2,term3,term4,term5,term6,term7,term8,
+      DOUBLE PRECISION   a,b,c,w,f,gamm,eps,machep,test,arg,rn,sum,et1,
+     #         et2,term1,term2,term3,term4,term5,term6,term7,term8,
      #         temp,temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8,
      #         coeff,coeff1,coeff2,coeff3,coeff4,x,x1,x2,x3,x4,
      #         t1(0:80),t2(0:80),t3(0:80),t4(0:80),c1(0:80),c2(0:80),
@@ -3712,10 +3751,10 @@ c***********************************************************************
 
       subroutine fix5a(a,b,c,n,k,re,im,w,machep,eps,pi)
 
-      real*8  zero,one,two,four,eighth,seven,eight,sxteen
+      DOUBLE PRECISION  zero,one,two,four,eighth,seven,eight,sxteen
       parameter (zero=0.d0,one=1.d0,two=2.d0,four=4.d0,eighth=1.d0/8.d0,
      #           seven=7.d0,eight=8.d0,sxteen=16.d0,nmax=100)
-      real*8   a,b,c,w,re,im,gamm,temp,temp2,g1(0:nmax),g2,
+      DOUBLE PRECISION   a,b,c,w,re,im,gamm,temp,temp2,g1(0:nmax),g2,
      #         g3(0:nmax),g4(0:nmax),g5(0:nmax),x,x1,x2,x3,x4,psi,rn,
      #         t1(0:80),t2(0:80),t3(0:80),t4(0:80),test,machep,pi,
      #         f1(0:80),f2(0:80),f3(0:80),f4(0:80),ff3(0:nmax),eps,
@@ -4240,18 +4279,18 @@ c***********************************************************************
 
       subroutine fix5b(a,b,c,n,k,re,im,w,machep,eps,pi)
 
-      real*8  zero,one,two,four,eighth,seven,eight,sxteen
+      DOUBLE PRECISION  zero,one,two,four,eighth,seven,eight,sxteen
       parameter (zero=0.d0,one=1.d0,two=2.d0,four=4.d0,eighth=1.d0/8.d0,
      #           seven=7.d0,eight=8.d0,sxteen=16.d0,nmax=100)
-      real*8   a,b,c,w,re,im,gamm,temp,temp2,g1(0:nmax),g2(0:nmax),
-     #         g3(0:nmax),g4(0:nmax),g5(0:nmax),x,x1,x2,x3,x4,psi,rn,
-     #         t1(0:80),t2(0:80),t3(0:80),t4(0:80),test,machep,pi,
-     #         f1(0:80),f2(0:80),f3(0:80),f4(0:80),ff3(0:nmax),eps,
-     #         ff4(0:nmax),coeff1,coeff2,c1(0:80),c2(0:80),c3(0:80),
-     #         c4(0:80),sum,term1,term2,term3,term4,term5,term6,
-     #         coeff,temp1,et1,et2,e1,e2(0:nmax),coeff3,coeff4,
-     #         fff1(0:nmax),fff2(0:nmax),ff1(0:nmax),ff2(0:nmax),
-     #         poch1(0:nmax),poch2(0:nmax),ttest,error
+      DOUBLE PRECISION   a,b,c,w,re,im,gamm,temp,temp2,g1(0:nmax),
+     #       g2(0:nmax),g3(0:nmax),g4(0:nmax),g5(0:nmax),x,x1,x2,x3,x4,
+     #       psi,rn,t1(0:80),t2(0:80),t3(0:80),t4(0:80),test,machep,pi,
+     #       f1(0:80),f2(0:80),f3(0:80),f4(0:80),ff3(0:nmax),eps,
+     #       ff4(0:nmax),coeff1,coeff2,c1(0:80),c2(0:80),c3(0:80),
+     #       c4(0:80),sum,term1,term2,term3,term4,term5,term6,
+     #       coeff,temp1,et1,et2,e1,e2(0:nmax),coeff3,coeff4,
+     #       fff1(0:nmax),fff2(0:nmax),ff1(0:nmax),ff2(0:nmax),
+     #       poch1(0:nmax),poch2(0:nmax),ttest,error
 
       integer  flag
 
@@ -4801,12 +4840,12 @@ c***********************************************************************
 
       subroutine fix6(a,b,c,n,k,re,im,w,machep,eps,pi)
 
-      real*8  zero,one,two,four,eighth,seven,eight,sxteen
+      DOUBLE PRECISION  zero,one,two,four,eighth,seven,eight,sxteen
       parameter (zero=0.d0,one=1.d0,two=2.d0,four=4.d0,eighth=1.d0/8.d0,
      #           seven=7.d0,eight=8.d0,sxteen=16.d0,nmax=100)
-      real*8   a,b,c,w,re,im,gamm,temp,temp2,g1(0:nmax),g2(0:nmax),
-     #         g3(0:nmax),g4(0:nmax),g5(0:nmax),x,x1,x2,x3,x4,psi,rn,
-     #         t1(0:80),t2(0:80),t3(0:80),t4(0:80),test,machep,pi,
+      DOUBLE PRECISION   a,b,c,w,re,im,gamm,temp,temp2,g1(0:nmax),
+     #      g2(0:nmax),g3(0:nmax),g4(0:nmax),g5(0:nmax),x,x1,x2,x3,x4,
+     #     psi,rn,t1(0:80),t2(0:80),t3(0:80),t4(0:80),test,machep,pi,
      #         f1(0:80),f2(0:80),f3(0:80),f4(0:80),ff3(0:nmax),eps,
      #         ff4(0:nmax),coeff1,coeff2,c1(0:80),c2(0:80),c3(0:80),
      #         c4(0:80),sum,term1,term2,term3,term4,term5,et1,et2,error,
@@ -5355,7 +5394,7 @@ c**********************************************************************
 *
       subroutine geteps(machep,neps)
 *
-      real*8            machep,one,two,temp
+      DOUBLE PRECISION      machep,one,two,temp
       integer            neps
       parameter (one = 1.0d0, two = 2.0d0)
       machep = one
@@ -5445,7 +5484,7 @@ c***********************************************************************
 
       subroutine cheb(c,n,flag)
 
-      real*8  c(0:n)
+      DOUBLE PRECISION  c(0:n)
       integer  flag
 
       if (flag.eq.1) go to 100
@@ -5639,37 +5678,31 @@ C>>>>>>>>>>>>>>>>>>>>  variation of subroutine mds.f  <<<<<<<<<<<<<<<<<<<<<<<<<C
       BL = cBL
       COLS = cCOLS
       CUT = cCUT
-	eps=0.0D-5
-	ef=0    
+	    eps=0.0D-5
+	    ef=0    
 	      
-	do 8 i = 1, N
+	    do 8 i = 1, N
         do 8 j = 1, (BL+COLS)
-8       X(i,j) = cX(i,j)
+       X(i,j) = cX(i,j)
+8       continue
       do 5 i = 1, NM
         NF(i) = cNF(i)
         SIGMA2(i) = cSIGMA2(i)
         P(i) = cP(i)
         do 6 j = 1, MNF
-6         JFAC(i,j) = cJFAC(i,j)
+         JFAC(i,j) = cJFAC(i,j)
+6       continue
 5     continue
 
-
-
-c     To avoid warnings
-      DATA BESTI /0/
-
-C      DATA DTOP /MXSTRT*0.0/
-      do 17 i = 1, MXSTRT
-17    DTOP(i) = 0.0D0
+      BESTI=0
 	
+      do 17 i = 1, MXSTRT
+       DTOP(i) = 0.0D0
+17	  continue
 
-C
-C     ONE-TIME INITIALIZATION
-C
       DO 190 IM=1,NM
-C
-C     AUGMENT CANDIDATE MATRIX WITH INTERACTION COLUMNS
-C
+
+C     AUGMENT CANDIDATE MATRIX WITH INTERACTION COLUMNSC
       TOTO=COLS+BL
       DO 920 M=2,CUT
          CALL INITIA2(MULT,M)
@@ -5677,96 +5710,110 @@ C
  925     IF (.NOT. PART) THEN
            TOTO=TOTO+1
            DO 930 I=1,N
- 930         X(I,TOTO)=X(I,MULT(1)+BL)*X(I,MULT(2)+BL)
-           DO 935 II=3,M
-             DO 935 I=1,N
- 935           X(I,TOTO)=X(I,TOTO)*X(I,MULT(II)+BL)
-           CALL INVREM2(MULT,PART,M,COLS)
+			X(I,TOTO)=X(I,MULT(1)+BL)*X(I,MULT(2)+BL)
+ 930       continue     
+           DO II=3,M
+             DO I=1,N
+                X(I,TOTO)=X(I,TOTO)*X(I,MULT(II)+BL)
+             end do 
+           end do
+		  CALL INVREM2(MULT,PART,M,COLS)
            GO TO 925
          ENDIF
  920  CONTINUE
-C
+
 
 	      
-	TK=NF(IM)
+	    TK=NF(IM)
       DO 110 I=1,N0
        A(I,1)=1.0                                                       
        DO 115 J=1,BL                                                    
- 115     A(I,1+J)=X0(I,J)
-       DO 110 J=1,TK                                                    
- 110     A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)                                
+         A(I,1+J)=X0(I,J)
+ 115   continue
+	 DO 110 J=1,TK                                                    
+         A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)                                
+ 110   continue 
       TOTO=TK+1+BL
       
 
-C
+
 C     AUGMENT WITH INTERACTION COLUMNS
-C                                                                       
+                                                                       
       DO 120 M=2,MIN(CUT,TK)
          CALL INITIA2(MULT,M)
          PART=.FALSE.
  125     IF (.NOT. PART) THEN
            TOTO=TOTO+1
            DO 130 I=1,N0
- 130         A(I,TOTO)=A(I,MULT(1)+1+BL)*A(I,MULT(2)+1+BL)
-           DO 135 II=3,M
-             DO 135 I=1,N0
- 135           A(I,TOTO)=A(I,TOTO)*A(I,MULT(II)+1+BL)
-           CALL INVREM2(MULT,PART,M,TK)
+             A(I,TOTO)=A(I,MULT(1)+1+BL)*A(I,MULT(2)+1+BL)
+ 130       continue 
+	     DO II=3,M
+             DO I=1,N0
+               A(I,TOTO)=A(I,TOTO)*A(I,MULT(II)+1+BL)
+             end do
+           end do  
+	     CALL INVREM2(MULT,PART,M,TK)
            GO TO 125
          ENDIF
  120  CONTINUE
 
 
-C
+
 C      FORM X-PRIME-X MATRIX
-C
+
       NN=MIN(N0,TOTO)
- 143	DO 140 I=1,NN
-      DO 140 J=I,NN
+ 143	DO I=1,NN
+      DO J=I,NN
         AA(I,J)=0.0
         DO 145 M=1,N0
- 145      AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
- 140   AA(J,I)=AA(I,J)
+          AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
+ 145    continue
+        AA(J,I)=AA(I,J)
+      end do 
+      end do 
 
-      DO 160 I=1,NN
+	    DO I=1,NN
       B(I)=0.0
-      DO 160 M=1,N0
- 160    B(I)=B(I)+A(M,I)*Y0(M)
+		  DO M=1,N0
+			B(I)=B(I)+A(M,I)*Y0(M)
+ 		  end do
+      end do 
 
+	    CALL DPOCO(AA,MAXCOL,NN,RCOND,Z,INFO)
 
-	CALL DPOCO(AA,MAXCOL,NN,RCOND,Z,INFO)
-
-	IF (info.ne.0) THEN                                    
-	IF (ef.eq.1) then  
+	    IF (info.ne.0) THEN                                    
+	    IF (ef.eq.1) then  
 			GO TO 190
-	else
+	    else
 			NN=NN-1
 			go to 143
-	ENDIF 
-	ENDIF
+	    ENDIF 
+	    ENDIF
 	                    
-	CALL DPODI(AA, MAXCOL,NN,DET,11)
+	    CALL DPODI(AA, MAXCOL,NN,DET,11)
 
-	IF (DET(2).LT. -3) THEN                                    
-	IF (ef.eq.1) then  
+	    IF (DET(2).LT. -3) THEN                                    
+	    IF (ef.eq.1) then  
 			GO TO 190
-	else
+	    else
 			NN=NN-1
 			go to 143
-	ENDIF                                                   
-	ENDIF
+	    ENDIF                                                   
+	    ENDIF
 					
  	
-      DO 165 I=1,NN
+      DO I=1,NN
         BETA(IM,I)=0.0
-        DO 165 J=1,NN
+        DO  J=1,NN
           IF (I .GT. J) AA(I,J)=AA(J,I)
           BETA(IM,I)=BETA(IM,I)+AA(I,J)*B(J)
           G(IM,I,J)=AA(I,J)
- 165    CONTINUE
+	    end do 
+	    end do 
+
  190  CONTINUE
 	
-C
+
 
       NDTOP=1
       IJ=1
@@ -5777,27 +5824,30 @@ C
         FLAG = 100
       ELSE
         do 791 I=1,NRUNS
-791        BEST(I) = MBEST(ISTART,I)
+	       BEST(I) = MBEST(ISTART,I)
+ 791    continue  
          FLAG = 200
       ENDIF
       CALL EVAL(NRUNS,BEST,D,NM)
-C
-C
-C
+
+
+
       M=0
       DBEST=D
       IF (DTOP(IJ) .LT. DBEST) THEN
         DESIN=.FALSE.
         DO 207 I=1,NRUNS
- 207      XBEST(I)=DFLOAT(BEST(I))
+		  XBEST(I)=DFLOAT(BEST(I))
+ 207    continue 
         CALL SSORT(XBEST,BEST,NRUNS,2)
         DO 209 J=1, NDTOP-1
           IF ((DABS((DTOP(J)-DBEST)/DTOP(J)) .LT. 0.00001) .AND.
      &    (DESIN .EQV. .FALSE.)) THEN
             IZ=0
             DO 208 I=1,NRUNS
- 208          IZ=IZ+IABS(TOPROW(J,I)-BEST(I))
-            IF (IZ .EQ. 0) DESIN=.TRUE.
+		       IZ=IZ+IABS(TOPROW(J,I)-BEST(I))
+ 208           continue
+		  IF (IZ .EQ. 0) DESIN=.TRUE.
           ENDIF
  209    CONTINUE
         IF (DESIN .EQV. .FALSE.) THEN
@@ -5811,18 +5861,18 @@ C
       ENDIF
 C      WRITE(*,1201) M,D,(BEST(J), J=1,NRUNS)
       IF (ITMAX .EQ. 0) GO TO 700
-C
-C    NOW START EXCHANGE ITERATIONS
-C
+
+C     NOW START EXCHANGE ITERATIONS
+
  500  CONTINUE
       DSTART=DBEST
       M=M+1
       N1=NRUNS+1
       DO 410 I=1,NRUNS
- 410    ROWS(I)=BEST(I)
-C
+	    ROWS(I)=BEST(I)
+ 410  continue
 C     FIRST CYCLE THROUGH THE N POSSIBLE ADDITIONAL POINTS              
-C
+
       DO 450 I=1,N
         ROWS(NRUNS+1)=I
         CALL EVAL(N1,ROWS,D,NM)
@@ -5832,9 +5882,9 @@ C
         ENDIF
  450  CONTINUE
 CC      WRITE(OUT,1201) M,DBEST,(BEST(J), J=1,NRUNS+1)
-C
+
 C     THEN CYCLE THROUGH THE (NRUNS+1) POSSIBLE DELETED POINTS          
-C                                                                       
+                                                                       
       N1=NRUNS
       DBEST=DSTART                                                      
       DO 460 I=1,NRUNS+1                                                
@@ -5846,15 +5896,17 @@ C
       IF (DTOP(IJ) .LT. D) THEN
         DESIN=.FALSE.
         DO 466 II=1,NRUNS                                                                                         
- 466      XBEST(II)=DFLOAT(ROWS(II))                                    
-        CALL SSORT(XBEST,ROWS,NRUNS,2)                                  
+	     XBEST(II)=DFLOAT(ROWS(II))                                    
+ 466    continue 
+	    CALL SSORT(XBEST,ROWS,NRUNS,2)                                  
         DO 468 JJ=1,NDTOP-1
           IF ((DABS((DTOP(JJ)-D)/DTOP(JJ)) .LT. 0.00001) .AND.
      &    (DESIN .EQV. .FALSE.)) THEN
             IZ=0
             DO 467 II=1,NRUNS
- 467          IZ=IZ+IABS(TOPROW(JJ,II)-ROWS(II))
-            IF (IZ .EQ. 0) DESIN=.TRUE.
+           IZ=IZ+IABS(TOPROW(JJ,II)-ROWS(II))
+ 467        continue   
+	      IF (IZ .EQ. 0) DESIN=.TRUE.
           ENDIF
  468    CONTINUE
         IF (DESIN .EQV. .FALSE.) THEN
@@ -5875,12 +5927,12 @@ C
       DO 475 J=1,NRUNS
         IF (J .GE. BESTI) BEST(J)=BEST(J+1)
  475  CONTINUE                                                          
-C      write (*,*) 
+ 
 C	WRITE(*,1201) M,DBEST,(BEST(J), J=1,NRUNS)                        
       IF ((DELTAD .GT. EPS).AND. (M .LT. ITMAX)) GO TO 500              
-C
+
 C   ITERATIONS ENDED; CONVERGENCE OR MAX ITERATIONS REACHED             
-C                                                                       
+                                                                       
       IF (DELTAD .LE. EPS) THEN
 CC        WRITE(OUT,1202)
 C       CALL SVIGN(NRUNS,BEST,BEST)                                     
@@ -5894,7 +5946,8 @@ C     WRITE(OUT,1101)
  700  CONTINUE
       ND=MIN0(MXSTRT,NDTOP-1)                                                 
       DO 701 I=1,ND
- 701    ITOP(I)=I                                                       
+         ITOP(I)=I
+ 701	continue                                                        
       CALL SSORT(DTOP,ITOP,ND,-2)                                       
 CC      WRITE(OUT,1209)
 C      WRITE(*,1206) ND
@@ -5905,11 +5958,12 @@ C        WRITE(*,1201) J,DTOP(J),(TOPROW(ITOP(J),K), K=1,NRUNS)
  710  CONTINUE
 ccccccccccccc
       NTOP = MIN0(NTOP,ND)
-      DO 711 J = 1,NTOP
+      DO  J = 1,NTOP
         TOPD(J) = DTOP(J)
-        DO 711 K=1,NRUNS
+        DO  K=1,NRUNS
            TOPDES(J,K) = TOPROW(ITOP(J),K)	
-711   CONTINUE
+        end do
+      end do 
 
  800  FORMAT(7X,' FORTRAN PROGRAM MD: BAYESIAN DESIGN OF EXPERIMENTS',/,                
      &3X,'FOLLOWUP DESIGN / WYNN EXCHANGE / RANDOM START',/,            
@@ -5952,7 +6006,7 @@ C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
 C      FLAG = 1
       RETURN
       END
-C
+
       SUBROUTINE FINDMIN(I,J,V,N)
       DOUBLE PRECISION V(N),D
       INTEGER I,J,N,K
@@ -5971,23 +6025,24 @@ C
       ENDIF
       END
 
-C
+
       SUBROUTINE RANST(N1,N,ROWS,R)
       INTEGER I,N1,N,ROWS(N)
       DOUBLE PRECISION X,R
-C
+
 C  THE FUNCTION RAND RETURNS A UNIFORM(0,1) DEVIATE;
 C  IF ANOTHER RANDOM NUMBER GENERATOR IS AVAILABLE THAT
 C  IS SET UP FOR THE MACHINE THIS IS RUNNING ON, IT CAN BE SUBSTITUTED
-C
+
    	  RR=R
       DO 1 I=1,N1
         X=RANDO(RR)
- 1      ROWS(I)=IDINT((N-1)*X)+1
-      RETURN
+        ROWS(I)=IDINT((N-1)*X)+1
+ 1    continue 
+	    RETURN
       END
-C
-C
+
+
       SUBROUTINE EVAL(N1,ROWS,D,NM)
 
 C	modification original EVAL for Objective Bayesian Analysis
@@ -6011,13 +6066,15 @@ C
         DO 215 I=1,N1
           A(I,1)=1.0
           DO 220 J=1,BL
- 220        A(I,1+J)=X(ROWS(I),J)
+             A(I,1+J)=X(ROWS(I),J)
+ 220      continue 
           DO 215 J=1,TK
- 215        A(I,J+1+BL)=X(ROWS(I),JFAC(IM,J)+BL)
+             A(I,J+1+BL)=X(ROWS(I),JFAC(IM,J)+BL)
+ 215      continue 
         TOTO=TK+1+BL
-C
+
 C     AUGMENT WITH INTERACTION COLUMNS
-C
+
         DO 225 M=2,MIN(CUT,TK)
           CALL INITIA2(MULT,M)
           PART=.FALSE.
@@ -6034,96 +6091,115 @@ C
      &  (I1-I0-1)*(COLS-I0)-(I1-I0-1)*(I1-I0)/2+I2-I1+BL
             ENDIF
            DO 235 I=1,N1
- 235         A(I,TOTO)=X(ROWS(I),CNO)
+				A(I,TOTO)=X(ROWS(I),CNO)
+ 235       continue  
            CALL INVREM2(MULT,PART,M,TK)
            GO TO 230
          ENDIF
  225  CONTINUE
-C
-C
-C
-      DO 240 I=1,TOTO
-      DO 240 J=1,N1
+
+
+
+      DO I=1,TOTO
+      DO J=1,N1
          V(I,J)=0.0
-       DO 240 M=1,TOTO
- 240     V(I,J)=V(I,J)+G(IM,I,M)*A(J,M)
-C
-      DO 245 I=1,N1
+       DO M=1,TOTO
+         V(I,J)=V(I,J)+G(IM,I,M)*A(J,M)
+       end do
+	     end do 
+	     end do 
+
+      DO I=1,N1
       V2(I,I)=1.0
-      DO 245 J=1,N1
+      DO J=1,N1
          IF (I .NE. J) V2(I,J)=0.0
-         DO 245 M=1,TOTO
- 245     V2(I,J)=V2(I,J)+A(I,M)*V(M,J)
-C
-      DO 246 I=1,N1
-        DO 246 J=1,N1
- 246      V(I,J)=V2(I,J)
+         DO M=1,TOTO
+           V2(I,J)=V2(I,J)+A(I,M)*V(M,J)
+         end do 
+	    end do
+	    end do 
+
+      DO I=1,N1
+        DO  J=1,N1
+          V(I,J)=V2(I,J)
+      end do 
+	    end do 
+
 C     CALL DLINDS(N1,V2,32,V,32)
 
       CALL DPOCO(V,32,N1,RCOND,Z,INFO)
 
-	IF (info.ne.0) THEN                                    
-	ENDIF
+	    IF (info.ne.0) THEN                                    
+	    ENDIF
 	
       CALL DPODI(V,32,N1,DET,11)
 
 
-      DO 250 I=1,N1
-        DO 250 J=1,N1
+      DO I=1,N1
+        DO  J=1,N1
           IF (I .GT. J) V(I,J)=V(J,I)
           DV(IM,I,J)=V(I,J)
- 250      DV2(IM,I,J)=V2(I,J)
-C
-      DO 255 I=1,N1
+          DV2(IM,I,J)=V2(I,J)
+        end do 
+      end do 
+
+      DO I=1,N1
         YHAT(IM,I)=0.0
-        DO 255 J=1,TOTO
+        DO J=1,TOTO
           YHAT(IM,I)=YHAT(IM,I)+A(I,J)*BETA(IM,J)
- 255  continue
+        end do 
+	    end do
+
  210  CONTINUE
-c      return
-C
-C
+
+
       DO 300 IM=1,NM-1
 C       WRITE(15,*) 'DES- ',ID,' 1ST MODEL PAIR MEMBER- ',IM
-        DO 300 JM=IM+1,NM
-C
+        DO 301 JM=IM+1,NM
+
         TR=0.0
         TR1=0.0
         TR2=0.0
-        DO 310 I=1,N1
-        DO 310 J=1,N1
+        DO I=1,N1
+        DO  J=1,N1
          TR1=TR1+0.5*(DV(IM,I,J)*DV2(JM,J,I))
          TR2=TR2+0.5*(DV2(IM,I,J)*DV(JM,J,I))
- 310     TR=TR+0.5*(DV(IM,I,J)*DV2(JM,J,I)+DV2(IM,I,J)*DV(JM,J,I))
-C
-C
-      DO 320 I=1,N1
+         TR=TR+0.5*(DV(IM,I,J)*DV2(JM,J,I)+DV2(IM,I,J)*DV(JM,J,I))
+        end do
+	      end do 
+
+      DO I=1,N1
         W(I)=0.0
         W1(I)=0.0
-        DO 320 J=1,N1
+        DO J=1,N1
           W(I)=W(I)+DV(JM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(IM)
- 320      W1(I)=W1(I)+DV(IM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(JM)
-      DEV=0.0
+          W1(I)=W1(I)+DV(IM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(JM)
+      end do
+	    end do 
+
+	    DEV=0.0
       DEV1=0.0
       DEV2=0.0
       DO 330 I=1,N1
         DEV1=DEV1+(YHAT(IM,I)-YHAT(JM,I))*W1(I)
- 330    DEV2=DEV2+(YHAT(IM,I)-YHAT(JM,I))*W(I)
-      DEV1=DEV1/2.0
+        DEV2=DEV2+(YHAT(IM,I)-YHAT(JM,I))*W(I)
+ 330  continue 
+	    DEV1=DEV1/2.0
       DEV2=DEV2/2.0
       DEV=(DEV1+DEV2)
-C  
-	D0=P(IM)*P(JM)*(TR+DEV-N1)
+  
+	    D0=P(IM)*P(JM)*(TR+DEV-N1)
       D=D+D0
 C      WRITE(OUT,500) IM,JM,P(IM),P(JM),TR1,TR2,DEV1,DEV2,N1,D0
- 300  CONTINUE
+ 301  CONTINUE
+ 300  continue  
  500  FORMAT(1X,I3,I3,F7.4,F7.4,F8.2,F8.2,F8.2,F8.2,I3,F8.2)
       RETURN
       END
-C
-C
-C
-C
+
+
+
+
       SUBROUTINE INVREM2(J,ALL,R,N)
       INTEGER M,L,R,N,J(20)
       LOGICAL OK,ALL
@@ -6134,8 +6210,9 @@ C
          IF (J(L) .LT. N-R+L) THEN
             J(L)=J(L)+1
             DO 101 M=L+1,R
- 101          J(M)=J(M-1)+1
-            OK=.TRUE.
+              J(M)=J(M-1)+1
+ 101        continue 
+	      OK=.TRUE.
          ELSE
             L=L-1
          ENDIF                                                          
@@ -6148,12 +6225,14 @@ C
       SUBROUTINE INITIA2(J,R)
         INTEGER J(20),R,I                                               
          DO 401 I=1,R                                                   
- 401        J(I)=I                                                      
+           J(I)=I 
+ 401     continue                                                      
          DO 402 I=R+1,20                                                
- 402        J(I)=0                                                      
+           J(I)=0
+ 402     continue                                                        
       RETURN                                                            
       END                                                               
-C                                                                       
+                                                                       
       FUNCTION RANDO (R)
 C APRIL 1977 VERSION.  W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
 C
@@ -6231,28 +6310,28 @@ C IA1 AND IA0 ARE THE HI AND LO PARTS OF A.  IA1MA0 = IA1 - IA0.
       DATA IA1, IA0, IA1MA0 /1536, 1029, 507/
       DATA IC /1731/
       DATA IX1, IX0 /0, 0/
-C
+
       IF (R.LT.0.) GO TO 10
       IF (R.GT.0.) GO TO 20
-C
+
 C           A*X = 2**22*IA1*IX1 + 2**11*(IA1*IX1 + (IA1-IA0)*(IX0-IX1)
 C                   + IA0*IX0) + IA0*IX0
-C
+
       IY0 = IA0*IX0
       IY1 = IA1*IX1 + IA1MA0*(IX0-IX1) + IY0
       IY0 = IY0 + IC
       IX0 = MOD (IY0, 2048)
       IY1 = IY1 + (IY0-IX0)/2048
       IX1 = MOD (IY1, 2048)
-C
+
  10   RANDO = IX1*2048 + IX0
       RANDO = RANDO / 4194304.
       RETURN
-C
+
  20   IX1 = AMOD(R,1.)*4194304. + 0.5
       IX0 = MOD (IX1, 2048)
       IX1 = (IX1-IX0)/2048
       GO TO 10
-C
+
       END
 
