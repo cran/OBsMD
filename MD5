@@ -1,5 +1,5 @@
-0ed06012f1166fd89e60b27a97a8785b *DESCRIPTION
-9eb3c1c681392e16ab6b7154e47e84ec *NAMESPACE
+977d1283166d8737b8ad1fe737d91e1f *DESCRIPTION
+a426fa5244ec7e1085a32790b1beba2e *NAMESPACE
 5aa89b8f7ab2216dcaf50d5d1803ff59 *R/OBsProb.r
 bae77c67f3ece3fc8f0e2d3a247eb4e0 *R/OMD.R
 3bf911b31641eb5db92f05b03ee2e3fe *R/plot.OBsProb.r
@@ -21,7 +21,7 @@ ffe1537b1c7a1c099a527feab930dff6 *data/Reactor.data.rda
 40658523be4b28e7aae11e534a6fec9a *man/BM93.e3.data.Rd
 00416d2d8d1dd47746ff28ac3eb4f13a *man/MetalCutting.rd
 2d4de584d060d51b559efd3ed3d81cd4 *man/OBsMD-internal.Rd
-2bb7943c2fdaecf8431170bd99b9cb37 *man/OBsMD-package.Rd
+76342505e9312760639dc5cdf3327bd2 *man/OBsMD-package.Rd
 d38a07ecd8b9125c2cf783c0a68c6723 *man/OBsMD.es5.Rd
 68d69959a9e815f5bb89adf1f66d9ac6 *man/OBsProb.rd
 b150fd615a509b45544e8b5282201d4e *man/OMD.Rd
@@ -33,4 +33,4 @@ dfcfff2924347ae3e921ec02d007bf6e *man/plot.OBsProb.Rd
 50de0130843aa022276c6162eb8749d3 *man/summary.OBsProb.Rd
 258b64f0711ef24e41be5175e26370c3 *man/summary.OMD.Rd
 c0df44e00b6017ed68fe0f4f7553ec45 *src/init.c
-97d8e8e8f9b4b0c5b905d360656aece7 *src/obsmd.f
+4cd6873a67e0ebaab58eb501de2b4afa *src/obsmd.f

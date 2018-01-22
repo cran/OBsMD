@@ -415,7 +415,7 @@ C Whatever is printed is an output subroutine parameter
 
       
 
-	    CLOSE(OUNIT)
+C	    CLOSE(OUNIT)
 
  1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
      &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
@@ -5671,7 +5671,7 @@ C>>>>>>>>>>>>>>>>>>>>  variation of subroutine mds.f  <<<<<<<<<<<<<<<<<<<<<<<<<C
       COMMON BETA,G,P,X,SIGMA2,NF,JFAC,BL,CUT,COLS,NM
 
       OUT = 1
-      OPEN(OUT,FILE="MDPrint.out")
+C     OPEN(OUT,FILE="MDPrint.out")
 
      
       NM = cNM
@@ -6001,7 +6001,7 @@ C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
  1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
      &' QF(J,I)  N*  TERM(I,J)')
 
-      CLOSE(OUT)
+C     CLOSE(OUT)
 
 C      FLAG = 1
       RETURN
