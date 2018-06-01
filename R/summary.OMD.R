@@ -20,7 +20,7 @@ function (object, digits = 3, verbose = FALSE, ...)
     if (any(object$D <= 0)) 
         ind <- min(which(object$D <= 0))
     else ind <- object$NTOP
-    toprun <- data.frame(D = object$TOPD, object$TOPDES)
+    toprun <- data.frame(OMD = object$TOPD, object$TOPDES)
     ind <- min(10, ind)
     cat("\n   Top", ind, "runs:\n")
     print(dd <- round(toprun[seq(ind), ], digits))

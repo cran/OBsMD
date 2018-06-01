@@ -11,6 +11,7 @@ importFrom(grDevices,grey)
 
 # export(.OBsMD)
 export("OBsProb","OMD")
+export("combinations")
 
 S3method(plot, OBsProb)
 S3method(print, OBsProb)

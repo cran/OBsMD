@@ -44,10 +44,6 @@ X <- as.matrix(OBsMD.es5[,1:5])
 y <- OBsMD.es5[,6]
 es5.OBsProb <- OBsProb(X=X,y=y,blk=0,mFac=5,mInt=2,nTop=32)
 nMod <- 26
-optop <- es5.OBsProb$ptop[1:nMod]
-osigtop <- es5.OBsProb$sigtop[1:nMod]
-onftop <- es5.OBsProb$nftop[1:nMod]
-ojtop <- es5.OBsProb$jtop[1:nMod,1:max(onftop[1:nMod])]     
 Xcand <- matrix(c(-1,	-1,	-1, -1,	-1,
 1,	-1,	-1,	-1,	-1,
 -1,	1,	-1,	-1,	-1,
@@ -81,8 +77,8 @@ Xcand <- matrix(c(-1,	-1,	-1, -1,	-1,
 -1,	1,	1,	1,	1,
 1,	1,	1,	1,	1
 ),nrow=32,ncol=5,dimnames=list(1:32,c("A","B","C","D","E")),byrow=TRUE)
-p_omd <- OMD(X=X,y=y,nFac=5,nBlk=0,mInt=2,nMod=26,optop=optop,osigtop=osigtop,
-onftop=onftop,ojtop=ojtop,nFoll=4,Xcand=Xcand,mIter=20,nStart=25,startDes=NULL,
+p_omd <- OMD(OBsProb=es5.OBsProb,nFac=5,nBlk=0,nMod=26,
+nFoll=4,Xcand=Xcand,mIter=20,nStart=25,startDes=NULL,
 top=30)
 summary(p_omd)
 }

@@ -7,23 +7,14 @@ Optimal follow-up experiments to discriminate between competing models. The extr
 of Kullback-Leibler divergences between all possible pairs of rival models
 }
 \usage{
-OMD(X, y, nFac, nBlk = 0, mInt, nMod, optop, osigtop, onftop, ojtop, nFoll,
-Xcand, mIter, nStart, startDes, top = 20)
+OMD(OBsProb, nFac, nBlk = 0, nMod, nFoll, Xcand, mIter, nStart, startDes, top = 20)
 }
 \arguments{
-  \item{X}{matrix. Design matrix of the initial experiment.}
-  \item{y}{vector. Response vector of the initial experiment.}
+  \item{OBsProb}{list. \code{OBsProb} class list. Output list of \code{OBsProb} function.}
   \item{nFac}{integer. Number of factors in the initial experiment.}
   \item{nBlk}{integer >=0. Number of blocking factors in the initial experiment.
                 They are accommodated in the first columns of matrix \code{X}.}
-  \item{mInt}{integer. Maximum order of interactions among factors in the models.}
   \item{nMod}{integer. Number of competing models considered to compute \code{OMD}.}
-  \item{optop}{vector. Vector (\code{nMod}) of posterior probabilities corresponding to the competing models. 
-  It derives from the \code{OBsProb} output.}
-  \item{osigtop}{vector. Vector (\code{nMod}) of competing models' residual variances. It derives from the \code{OBsProb} output.}
-  \item{onftop}{vector. Vector (\code{nMod}) of the number of main factors in each competing models. It derives from the \code{OBsProb} output.}
-  \item{ojtop}{matrix. Matrix [\code{nMod x max(onftop)}] of the labels of the main factors present in
-                each competing models. It derives from the \code{OBsProb} output.}
   \item{nFoll}{integer. Number of additional runs in the follow-up experiment.}
   \item{Xcand}{matrix. Matrix [\code{2^nFac x (nBlk + nFac)}] of candidate runs for the follow-up design. 
   It generally rapresents the full \code{2^nFac} design.}
@@ -64,7 +55,7 @@ subroutine \code{OMD}. Most of the variable names kept to match \acronym{FORTRAN
     \item{X}{matrix. Matrix from initial experiment (\code{nrow(X)}; \code{ncol(X)=nBlk+nFac}).}
     \item{Y}{double. Response values from initial experiment (\code{length(Y)=nrow(X)}).}
     \item{BL}{integer >=0. The number of blocking factors in the initial experiment.
-                They are accommodated in the first columns of matrix \code{X} and \code{Xcand}}.
+                They are accommodated in the first columns of matrix \code{X} and \code{Xcand}.}
     \item{COLS}{integer. Number of factors \code{nFac}.}
     \item{N}{integer. Number of candidate runs \code{nrow(Xcand)}.}
     \item{Xcand}{matrix. Matrix [\code{2^nFac x (nBlk + nFac)}] candidate runs for the follow-up design. 
@@ -117,10 +108,6 @@ X <- as.matrix(OBsMD.es5[,1:5])
 y <- OBsMD.es5[,6]
 es5.OBsProb <- OBsProb(X=X,y=y,blk=0,mFac=5,mInt=2,nTop=32)
 nMod <- 26
-optop <- es5.OBsProb$ptop[1:nMod]
-osigtop <- es5.OBsProb$sigtop[1:nMod]
-onftop <- es5.OBsProb$nftop[1:nMod]
-ojtop <- es5.OBsProb$jtop[1:nMod,1:max(onftop[1:nMod])]     
 Xcand <- matrix(c(-1,	-1,	-1, -1,	-1,
 1,	-1,	-1,	-1,	-1,
 -1,	1,	-1,	-1,	-1,
@@ -154,9 +141,8 @@ Xcand <- matrix(c(-1,	-1,	-1, -1,	-1,
 -1,	1,	1,	1,	1,
 1,	1,	1,	1,	1
 ),nrow=32,ncol=5,dimnames=list(1:32,c("A","B","C","D","E")),byrow=TRUE)
-p_omd <- OMD(X=X,y=y,nFac=5,nBlk=0,mInt=2,nMod=26,optop=optop,osigtop=osigtop,
-onftop=onftop,ojtop=ojtop,nFoll=4,Xcand=Xcand,mIter=20,nStart=25,startDes=NULL,
-top=30)
+p_omd <- OMD(OBsProb=es5.OBsProb,nFac=5,nBlk=0,nMod=26,nFoll=4,Xcand=Xcand,
+mIter=20,nStart=25,startDes=NULL,top=30)
 print(p_omd)
 }
 \keyword{ design }

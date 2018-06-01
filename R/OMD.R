@@ -1,26 +1,22 @@
 OMD <-
-function (X, y, nFac, nBlk = 0, mInt, nMod, optop, osigtop, onftop, ojtop, nFoll,
-          Xcand, mIter, nStart, startDes, top = 20)
-{
-  #  if (nFac + nBlk != ncol(X)) 
-  #      stop("nFac + nBlk != ncol(X)")
-   # if (nFac + nBlk != ncol(Xcand)) 
-    #    stop("nFac + nBlk != ncol(Xcand)")
-    #if (ncol(Xcand) != ncol(X)) 
-     #   stop("ncol(Xcand) != ncol(X)")
-    ITMAX <- as.integer(mIter)
+function (OBsProb, nFac, nBlk = 0, nMod, nFoll, Xcand, mIter, nStart, startDes, top = 20)
+{   ITMAX <- as.integer(mIter)
     N0 <- as.integer(nrow(X))
     NRUNS <- as.integer(nFoll)
     N <- as.integer(nrow(Xcand))
-    X <- as.matrix(X)
+    X <- as.matrix(OBsProb$X)
     storage.mode(X) <- "double"
-    Y <- as.double(y)
+    Y <- as.double(OBsProb$Y)
     COLS <- as.integer(nFac)
     BL <- as.integer(nBlk)
-    CUT <- as.integer(mInt)
+    CUT <- as.integer(OBsProb$MXINT)
     Xcand <- as.matrix(Xcand)
     storage.mode(Xcand) <- "double"
     NM <- as.integer(nMod)
+    optop <- OBsProb$ptop[1:nMod]
+    osigtop <- OBsProb$sigtop[1:nMod]
+    onftop <- OBsProb$nftop[1:nMod]
+    ojtop <- OBsProb$jtop[1:nMod,1:max(onftop[1:nMod])]
     P <- as.double(as.numeric(optop))
     SIGMA2 <- as.double(as.numeric(osigtop))
     NF <- as.integer(as.numeric(onftop))
