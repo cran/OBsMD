@@ -10,7 +10,7 @@ function (object, nTop = 10, digits = 3, ...)
     out.list <- list(calc = calc)
     print(round(calc, digits = digits))
     prob <- data.frame(Factor = names(object$prob),  
-        Prob = round(object$prob, digits), row.names = seq(length(object$prob)))
+        Prob = round(object$prob, digits), row.names = c(" ",seq(length(object$prob)-1)))
         cat("\n Factor probabilities:\n")
         print(prob, digits = digits)
         cat("\n Model probabilities:\n")
@@ -20,8 +20,7 @@ function (object, nTop = 10, digits = 3, ...)
         Sigma2 <- round(object$sigtop, digits)
         Factors <- apply(object$jtop, 1, function(x) ifelse(all(x == 
             0), "none", paste(x[x != 0], collapse = ",")))
-        dd <- data.frame(Prob, Sigma2, NumFac, Factors)[ind, 
-            ]
+        dd <- data.frame(Prob, Sigma2, NumFac, Factors)[ind, ]
         print(dd, digits = digits, right = FALSE)
         out.list[["probabilities"]] <- prob
         out.list[["models"]] <- dd

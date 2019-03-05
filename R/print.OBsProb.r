@@ -27,7 +27,7 @@ function (x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE,
     if (factors) {
     cat("\n Factor probabilities:\n")
         prob <- data.frame(Factor = names(x$prob), 
-            Prob = round(x$prob, digits), row.names = seq(length(x$prob)))
+            Prob = round(x$prob, digits), row.names = c(" ",seq(length(x$prob)-1)))
         print(prob, digits = digits)
         out.list[["probabilities"]] <- prob
     }
@@ -39,8 +39,7 @@ function (x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE,
         Sigma2 <- round(x$sigtop, digits)
         Factors <- apply(x$jtop, 1, function(x) ifelse(all(x == 
             0), "none", paste(x[x != 0], collapse = ",")))
-        dd <- data.frame(Prob, Sigma2, NumFac, Factors)[ind, 
-            ]
+        dd <- data.frame(Prob, Sigma2, NumFac, Factors)[ind, ]
         print(dd, digits = digits, right = FALSE)
         out.list[["models"]] <- dd                     
     }
