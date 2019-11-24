@@ -12,16 +12,16 @@ Implements the objective Bayesian methodology proposed in Consonni and Deldossi 
 \tabular{ll}{
 Package: \tab OBsMD\cr
 Type: \tab Package\cr
-Version: \tab 5.0\cr
-Date: \tab 2019-03-05\cr
+Version: \tab 5.3\cr
+Date: \tab 2019-11-24\cr
 License: \tab GPL version 3 or later\cr
 }
 The packages allows you to perform the calculations and analyses described
-in Consonni and Deldossi paper in TEST (2015), Objective Bayesian model discrimination 
+in Consonni and Deldossi paper in TEST (2015), Objective Bayesian model discrimination
 in follow-up experimental designs.
 }
 \author{
-Author: Laura Deldossi and Marta Nai Ruscone based on Daniel Meyer's code.
+Author: Laura Deldossi and Marta Nai Ruscone based on Daniel Meyer's code.\\
 Maintainer: Marta Nai Ruscone <mnairuscone@liuc.it>
 }
 \references{

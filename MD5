@@ -1,4 +1,4 @@
-f656915c4198ce3f060a38c54a163e7d *DESCRIPTION
+a284d819bc47e0e3aaee0fa12d1f5e71 *DESCRIPTION
 ff7cf1af7b0d86ae20af9f8447021568 *NAMESPACE
 5aa89b8f7ab2216dcaf50d5d1803ff59 *R/OBsProb.r
 06ebe6489d7c9fe6e7fffdee15da2a60 *R/OMD.R
@@ -22,13 +22,13 @@ ffe1537b1c7a1c099a527feab930dff6 *data/Reactor.data.rda
 40658523be4b28e7aae11e534a6fec9a *man/BM93.e3.data.Rd
 00416d2d8d1dd47746ff28ac3eb4f13a *man/MetalCutting.rd
 2d4de584d060d51b559efd3ed3d81cd4 *man/OBsMD-internal.Rd
-edc5b8fb9aa078fb779f5e35355d9ffb *man/OBsMD-package.Rd
+b6eecd53585568ae8cc3a9b390c22349 *man/OBsMD-package.Rd
 d38a07ecd8b9125c2cf783c0a68c6723 *man/OBsMD.es5.Rd
 68d69959a9e815f5bb89adf1f66d9ac6 *man/OBsProb.rd
 c6666a0773ea48fd245c40e54e789173 *man/OMD.Rd
 79a2f8b1b57de1a954f3843029a92c8b *man/PB12Des.Rd
 dcec24457157c7ca3ac2b2c209a820b0 *man/Reactor.data.Rd
-8fe9edc9184ba0d16ddbc0c82f7cac0d *man/combinations.Rd
+7fb6d0ae09d9fedd58d5e83466f0d450 *man/combinations.Rd
 dfcfff2924347ae3e921ec02d007bf6e *man/plot.OBsProb.Rd
 7ae2c5eebc3dc95dc6e77b0658e7e868 *man/print.OBsProb.Rd
 dc622766e2795e8891627a7dd6399da0 *man/print.OMD.Rd

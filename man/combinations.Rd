@@ -42,13 +42,13 @@ combinations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 \examples{
 combinations(3,2,letters[1:3])
 combinations(3,2,c(1:3),repeats=TRUE)
-combinations(64,4,1:64,repeats=TRUE)
+combinations(6,3,1:6,repeats=TRUE)
 
 
 
 # To use large 'n', you need to change the default recusion limit
 options(expressions=1e5)
-cmat <- combinations(300,2)
-dim(cmat) # 44850 by 2 
+cmat <- combinations(100,2)
+dim(cmat) # 4950 by 2
 }
-\keyword{ manip }
+\keyword{manip}
