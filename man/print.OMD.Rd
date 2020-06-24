@@ -3,7 +3,7 @@
 \title{Print Optimal OMD Follow-Up Experiments}
 \description{
     Printing method for  lists of class \code{OMD}. It displays the
-    best extra-runs according to the OMD criterion together with the correspondent OMD values. 
+    best extra-runs according to the OMD criterion together with the correspondent OMD values.
 }
 \usage{
     \method{print}{OMD}(x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE, nMod = x$nMod,
@@ -32,15 +32,18 @@
         their corresponding OMD statistic.}
 }
 \references{
-Box, G. E. P and R. D. Meyer (1993). "Finding the Active Factors
-in Fractionated Screening Experiments".
-\emph{Journal of Quality Technology.} Vol. 25. No. 2. pp. 94--105.
+  Box, G. E. P. and Meyer, R. D. (1993)
+  Finding the Active Factors in Fractionated Screening Experiments.,
+  \emph{Journal of Quality Technology} \bold{25}(2), 94--105.
+  \doi{10.1080/00224065.1993.11979432}.
 
-Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996). "Follow-Up Designs
-to Resolve Confounding in Multifactor Experiments (with discussion)".
-\emph{Technometrics}, Vol. 38, No. 4, pp. 303--332.
-} 
-                                 
+  Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996)
+  Follow-Up Designs to Resolve Confounding in Multifactor Experiments (with discussion).,
+  \emph{Technometrics} \bold{38}(4), 303--332.
+  \doi{10.2307/1271297}.
+
+}
+
 \author{Marta Nai Ruscone.}
 \seealso{\code{\link{OMD}}, \code{\link{OBsProb}}}
 

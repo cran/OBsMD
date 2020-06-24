@@ -20,14 +20,17 @@
     \item{y}{a numeric vector. Natural log of fatigue life response.}
   }
 }
-\source{
-Hunter, G. B., Hodi, F. S., and Eager, T. W. (1982). "High-Cycle Fatigue
-of Weld Repaired Cast Ti-6A1-4V". \emph{Metallurgical Transactions} 13A,
-pp. 1589--1594.
+\references{
+  Hunter, G. B., Hodi, F. S., and Eager, T. W. (1982)
+  High-Cycle Fatigue of Weld Repaired Cast Ti-6A1-4V.,
+  \emph{Metallurgical Transactions} \bold{13}(9), 1589--1594.
 
-Box, G. E. P and R. D. Meyer (1993). "Finding the Active Factors
-in Fractionated Screening Experiments".
-\emph{Journal of Quality Technology.} Vol. 25. No. 2. pp. 94--105.
+
+  Box, G. E. P. and Meyer, R. D. (1993)
+  Finding the Active Factors in Fractionated Screening Experiments.,
+  \emph{Journal of Quality Technology} \bold{25}(2), 94--105.
+  \doi{10.1080/00224065.1993.11979432}.
+
 }
 \examples{
 library(OBsMD)

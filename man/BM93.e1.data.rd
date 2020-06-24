@@ -19,13 +19,15 @@
     \item{y}{a numeric vector. Percent reacted response.}
   }
 }
-\source{
-Box G. E. P, Hunter, W. C. and Hunter, J. S. (1978).
-    \emph{Statistics for Experimenters}. Wiley.
+\references{
+  Box, G. E. P., Hunter, W. C. and Hunter, J. S. (1978)
+  \emph{Statistics for Experimenters}. Wiley.
 
-Box, G. E. P and R. D. Meyer (1993). "Finding the Active Factors
-in Fractionated Screening Experiments".
-\emph{Journal of Quality Technology.} Vol. 25. No. 2. pp. 94--105.
+  Box, G. E. P. and Meyer, R. D. (1993)
+  Finding the Active Factors in Fractionated Screening Experiments.,
+  \emph{Journal of Quality Technology} \bold{25}(2), 94--105.
+  \doi{10.1080/00224065.1993.11979432}.
+
 }
 \examples{
 library(OBsMD)

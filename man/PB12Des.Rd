@@ -22,8 +22,8 @@
     \item{x11}{numeric vectors. Contrast factor.}
   }
 }
-\source{
-Box G. E. P, Hunter, W. C. and Hunter, J. S. (2004).
+\references{
+    Box G. E. P., Hunter, W. C. and Hunter, J. S. (2004)
     \emph{Statistics for Experimenters II}. Wiley.
 }
 \examples{

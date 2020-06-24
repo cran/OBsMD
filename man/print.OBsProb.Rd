@@ -33,13 +33,18 @@
    \item{CV}{Coefficient of variation of factor posterior probabilities.}
 }
 
-\references{ Box, G. E. P and R. D. Meyer (1986). "An Analysis for
-Unreplicated Fractional Factorials". \emph{Technometrics.} Vol. 28. No. 1.
-pp. 11--18.
+\references{
+  Box, G. E. P. and Meyer R. D. (1986)
+  An Analysis of Unreplicated Fractional Factorials.,
+  \emph{Technometrics} \bold{28}(1), 11--18.
+  \doi{10.1080/00401706.1986.10488093}.
 
-Box, G. E. P and R. D. Meyer (1993). "Finding the Active Factors
-in Fractionated Screening Experiments".
-\emph{Journal of Quality Technology.} Vol. 25. No. 2. pp. 94--105.
+
+  Box, G. E. P. and Meyer, R. D. (1993)
+  Finding the Active Factors in Fractionated Screening Experiments.,
+  \emph{Journal of Quality Technology} \bold{25}(2), 94--105.
+  \doi{10.1080/00224065.1993.11979432}.
+
 
 }
 \author{Marta Nai Ruscone.}

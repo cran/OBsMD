@@ -17,12 +17,13 @@ Data of the Reactor Experiment from Box, Hunter and Hunter (1978).
     \item{y}{numeric vector. Percentage reacted response.}
   }
 }
-\source{
-Box G. E. P, Hunter, W. C. and Hunter, J. S. (2004).
+\references{
+Box G. E. P., Hunter, W. C. and Hunter, J. S. (1978)
+    \emph{Statistics for Experimenters}. Wiley.
+
+Box G. E. P., Hunter, W. C. and Hunter, J. S. (2004)
     \emph{Statistics for Experimenters II}. Wiley.
 
-Box G. E. P, Hunter, W. C. and Hunter, J. S. (1978).
-    \emph{Statistics for Experimenters}. Wiley.
 }
 \examples{
 library(OBsMD)

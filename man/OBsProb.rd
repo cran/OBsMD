@@ -2,7 +2,7 @@
 \alias{OBsProb}
 \title{Objective Posterior Probabilities from Bayesian Screening Experiments}
 \description{
-Objective model posterior probabilities and marginal factor posterior probabilities 
+Objective model posterior probabilities and marginal factor posterior probabilities
 from Bayesian screening experiments according to Consonni and Deldossi procedure.
 }
 \usage{
@@ -24,7 +24,7 @@ from Bayesian screening experiments according to Consonni and Deldossi procedure
 Model and factor posterior probabilities are computed according to Consonni and Deldossi Objective Bayesian
 procedure. The design factors are accommodated in the matrix \code{X} after
 \code{blk} columns of the blocking factors. So, \code{ncol(X)-blk} design factors
-are considered. 
+are considered.
 A \acronym{Beta(abeta, bbeta)} distribution is assumed as a prior on model space.
 The function calls the \acronym{FORTRAN} subroutine \file{obm} and captures summary results.
 The complete output of the \acronym{FORTRAN} code is save in the \file{OBsPrint.out}
@@ -45,7 +45,7 @@ code. Small letters are used for capturing program's output.
                 columns of matrix \code{X}.}
   \item{MXFAC}{integer. Maximum number of factors considered in the models.}
   \item{MXINT}{integer. Maximum interaction order among factors considered in the models.}
-  \item{NTOP}{integer. Number of models to print ordered according to the highest posterior probability}.
+  \item{NTOP}{integer. Number of models to print ordered according to the highest posterior probability.}
   \item{mdcnt}{integer. Total number of models evaluated.}
   \item{ptop}{vector. Vector of posterior probabilities of the top \code{ntop} models.}
   \item{nftop}{integer.  Number of factors in each of the top \code{ntop} models.}
@@ -53,18 +53,21 @@ code. Small letters are used for capturing program's output.
                 of the top \code{ntop} models.}
   \item{prob}{vector. Vector of factor posterior probabilities.}
   \item{sigtop}{vector. Vector of residual variances of the top \code{ntop} models.}
-  \item{ind}{integer. Indicator variable. \code{ind} is 1 if the \file{obm}  
+  \item{ind}{integer. Indicator variable. \code{ind} is 1 if the \file{obm}
                 subroutine exited properly. Any other number correspond to
                 the format label number in the \acronym{FORTRAN} subroutine script.}
 }
 \references{
-Consonni, G. and Deldossi, L. (2015), "Objective Bayesian model discrimination 
-in follow-up experimental designs" DOI 10.1007/s11749-015-0461-3. 
-\emph{TEST}.
+  Consonni, G. and Deldossi, L. (2016)
+  Objective Bayesian Model Discrimination in Follow-up design.,
+  \emph{Test} \bold{25}(3), 397--412.
+  \doi{10.1007/s11749-015-0461-3}.
 
-Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996). "Follow-Up Designs to Resolve Confounding in
-Multifactor Experiments (with discussion)". \emph{Technometrics}, Vol 38 No. 4. 
-pp. 303--332.
+  Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996)
+  Follow-Up Designs to Resolve Confounding in Multifactor Experiments (with discussion).,
+  \emph{Technometrics} \bold{38}(4), 303--332.
+  \doi{10.2307/1271297}.
+
 }
 \author{Laura Deldossi. Adapted for \R by Marta Nai Ruscone.}
 \note{

@@ -27,9 +27,11 @@ Meyer (1986) } \usage{data(BM86.data)} \format{
     \item{y4}{numeric vector.  Yield of isatin response.}
   }
 }
-\source{
-Box, G. E. P and R. D. Meyer (1986). "An Analysis of Unreplicated
-Fractional Factorials". \emph{Technometrics.} Vol. 28. No. 1. pp. 11--18.
+\references{
+  Box, G. E. P. and Meyer, R. D. (1986)
+  An Analysis of Unreplicated Fractional Factorials.,
+  \emph{Technometrics} \bold{28}(1), 11--18.
+  \doi{10.1080/00401706.1986.10488093}.
 }
 \examples{
 library(OBsMD)

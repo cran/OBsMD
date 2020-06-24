@@ -32,7 +32,8 @@ combinations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 \value{
   Returns a matrix where each row contains a vector of length \code{r}.
 }
-\references{Venables, Bill.  "Programmers Note", R-News, Vol 1/1,
+\references{
+Venables, Bill.  "Programmers Note", R-News, Vol 1/1,
   Jan. 2001. \url{https://cran.r-project.org/doc/Rnews} }
 \author{ Original versions by Bill Venables
   \email{Bill.Venables@cmis.csiro.au}.  Extended to handle

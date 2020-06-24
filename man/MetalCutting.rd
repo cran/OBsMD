@@ -1,9 +1,9 @@
 \name{MetalCutting}
 \alias{MetalCutting}
 \docType{data}
-\title{Data sets in Edwards, Weese and Palmer(2014)}
-\description{Design factors and responses used in the examples of Edwards, Weese and Palmer(2014)} 
-\usage{data(MetalCutting)} 
+\title{Data sets in Edwards, Weese and Palmer (2014)}
+\description{Design factors and responses used in the examples of Edwards, Weese and Palmer (2014)}
+\usage{data(MetalCutting)}
 \format{
   A data frame with 64 observations on the following 8 variables.
   \describe{
@@ -17,10 +17,12 @@
     \item{Ytransformed}{numeric vector. Response.}
   }
 }
-\source{
-Edwards, D. J. P; Weese, M. L. and Palmer, G. A. (2014). "Comparing methods for design 
-follow-uprevisiting a metal-cutting case study". 
-\emph{Applied Stochastic Models in Business and Industry.} Vol. 30. No. 4. pp. 464--478.
+\references{
+Edwards, D. J. P., Weese, M. L. and Palmer, G. A. (2014)
+Comparing methods for design
+follow-uprevisiting a metal-cutting case study.,
+\emph{Applied Stochastic Models in Business and Industry} \bold{30}(4), 464--478.
+  \doi{10.1002/asmb.1988}
 }
 \examples{
 library(OBsMD)

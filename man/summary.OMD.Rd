@@ -3,7 +3,7 @@
 \title{Summary of Optimal OMD Follow-Up Experiments}
 \description{
     Reduced printing method for lists of class \code{OMD}. It displays the
-    best extra-runs according to the OMD criterion together with the correspondent OMD value. 
+    best extra-runs according to the OMD criterion together with the correspondent OMD value.
 }
 \usage{
     \method{summary}{OMD}(object, digits = 3, verbose=FALSE, ...)
@@ -17,20 +17,24 @@
 \value{
     It prints out the marginal factors and models posterior probabilities and
     the top OMD follow-up experiments with their corresponding OMD statistic.}
-    
+
 
 \references{
-Box, G. E. P and R. D. Meyer (1993). "Finding the Active Factors
-in Fractionated Screening Experiments".
-\emph{Journal of Quality Technology.} Vol. 25. No. 2. pp. 94--105.
+  Box, G. E. P. and Meyer, R. D. (1993)
+  Finding the Active Factors in Fractionated Screening Experiments.,
+  \emph{Journal of Quality Technology} \bold{25}(2), 94--105.
+  \doi{10.1080/00224065.1993.11979432}.
 
-Consonni, G. and Deldossi, L. (2015), "Objective Bayesian model discrimination 
-in follow-up experimental designs" DOI 10.1007/s11749-015-0461-3. 
-\emph{TEST}.
+  Consonni, G. and Deldossi, L. (2016)
+  Objective Bayesian Model Discrimination in Follow-up design.,
+  \emph{Test} \bold{25}(3), 397--412.
+  \doi{10.1007/s11749-015-0461-3}.
 
-Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996). "Follow-Up Designs
-to Resolve Confounding in Multifactor Experiments (with discussion)".
-\emph{Technometrics}, Vol. 38, No. 4, pp. 303--332.
+  Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996)
+  Follow-Up Designs to Resolve Confounding in Multifactor Experiments (with discussion).,
+  \emph{Technometrics} \bold{38}(4), 303--332.
+  \doi{10.2307/1271297}.
+
 }
 
 \author{Marta Nai Ruscone.}
