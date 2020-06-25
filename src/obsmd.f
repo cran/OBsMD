@@ -173,6 +173,7 @@ C
 	
       do 52 i = 1,MAXNMD
         PTOP(i) = -1.0D0
+        SIGMA(i)=0.0D0
 52    continue
 	
 

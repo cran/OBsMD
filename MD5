@@ -1,4 +1,4 @@
-a6d3a5cba39e445ae0ef83b65e272660 *DESCRIPTION
+72cdbda609d06cf07317803682daa502 *DESCRIPTION
 ff7cf1af7b0d86ae20af9f8447021568 *NAMESPACE
 5aa89b8f7ab2216dcaf50d5d1803ff59 *R/OBsProb.r
 06ebe6489d7c9fe6e7fffdee15da2a60 *R/OMD.R
@@ -8,7 +8,7 @@ ff7cf1af7b0d86ae20af9f8447021568 *NAMESPACE
 d546d6113b1bed0dd5d3d42bf2f3e208 *R/print.OMD.R
 9c4f764b886c5ec9a4669dafbf935ae0 *R/summary.OBsProb.R
 d0a82a57590fd1251c6798b743144185 *R/summary.OMD.R
-f7a23aeafffe612b5f41cfdb35fbe696 *build/partial.rdb
+3514660405f9be5fd4f3109d82eb195d *build/partial.rdb
 d5943f73eebfbfb294b9574a0c0ffe1a *data/BM86.data.rda
 10a928155cdef6525c6d5d6a0837e798 *data/BM93.e1.data.rda
 f0b835a5435e6a4e80ae80b71825a26b *data/BM93.e2.data.rda
@@ -24,7 +24,7 @@ ffe1537b1c7a1c099a527feab930dff6 *data/Reactor.data.rda
 b273ba6f4baa0546099bb6e7eedbc358 *man/BM93.e3.data.Rd
 9dffcaad9665e5c3bbf18d865f0b9a42 *man/MetalCutting.rd
 2d4de584d060d51b559efd3ed3d81cd4 *man/OBsMD-internal.Rd
-3ed881e7698a6924cf70f029eb1776bf *man/OBsMD-package.Rd
+715f4efc4971436f1107e6926878848b *man/OBsMD-package.Rd
 529c6723b044d99ef886cfaae7bde47d *man/OBsMD.es5.Rd
 cbf921592fc00809eda44b608ed4ef44 *man/OBsProb.rd
 5e14135ccf694b8496ee00ea343fb267 *man/OMD.Rd
@@ -37,4 +37,4 @@ dc1cc545b11711f6e3dc617219c73fdb *man/print.OMD.Rd
 6fa132eebb3c96bbe1e8d05efffdd0b1 *man/summary.OBsProb.Rd
 17079bcb049a2bb1039b307f04b581df *man/summary.OMD.Rd
 c0df44e00b6017ed68fe0f4f7553ec45 *src/init.c
-4cd6873a67e0ebaab58eb501de2b4afa *src/obsmd.f
+66e5e106a7b0d69f8280904d0d8532bf *src/obsmd.f

@@ -12,8 +12,8 @@ Implements the objective Bayesian methodology proposed in Consonni and Deldossi 
 \tabular{ll}{
 Package: \tab OBsMD\cr
 Type: \tab Package\cr
-Version: \tab 6.0\cr
-Date: \tab 2020-06-23\cr
+Version: \tab 6.1\cr
+Date: \tab 2020-06-25\cr
 License: \tab GPL version 3 or later\cr
 }
 The packages allows you to perform the calculations and analyses described
@@ -28,7 +28,7 @@ Maintainer: Marta Nai Ruscone <marta.nairuscone@unige.it>
 Deldossi, L., Nai Ruscone, M. (2020)
 R Package OBsMD for Follow-up Designs in an
 Objective Bayesian Framework.
-  \emph{Journal of Statistical Software} \bold{94}(2)%, 1--20.
+  \emph{Journal of Statistical Software} \bold{94}(2), 1--37.
   \doi{10.18637/jss.v094.i02}.
 %  \url{http://www.jstatsoft.org}.
 
