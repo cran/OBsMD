@@ -1,4 +1,4 @@
-	    SUBROUTINE OBm(X,Y,N,COLS,abeta,bbeta,BLKS,MXFAC,MXINT,NTOP,
+      	    SUBROUTINE OBm(X,Y,N,COLS,abeta,bbeta,BLKS,MXFAC,MXINT,NTOP,
      *omdcnt,optop,onftop,ojtop,oprob,osigtop,ind)
       
       INTEGER N,COLS,BLKS,MXFAC,MXINT,NTOP,ind,contam,ef,t0,ti,
@@ -49,7 +49,7 @@ C        MAXTERM MAXIMUM ORDER OF MODEL MATRIX
 C        MAXDIM  MAXIMUM NUMBER OF DISTINCT PROBABILITIES TO COMPUTE
 C
       
-	    PARAMETER (LS=66,
+      	    PARAMETER (LS=66,
      *           MAXN=100,
      *           MAXCOL=25,
      *           MAXGAM=20,
@@ -58,7 +58,7 @@ C
      *           BIG=1.0E10,
      *           MAXTERM=1+MAXCOL+MAXCOL*(MAXCOL-1)/2,
      *           MAXDIM=MAXGAM*MAXCOL)
-	
+      	
 C        DESCRIPTION OF VARIABLES
 C        ------------------------
 C
@@ -117,7 +117,7 @@ C
      *coef1, coef2, coef3, coef4, coef5, coef6, coef7
 
       INTEGER NTERM,NN,NFAC,M,I,J,K,II,BAR,OLOOP,
-     *par1,par2,par3,par4,	 
+     *par1,par2,par3,par4,    
      *OCOUNT,ISTART,INUNIT,OUNIT,NLOW,INFO,
      *MULT(MAXCOL),JFAC(MAXCOL),JTOP(MAXNMD,MAXCOL),NFTOP(MAXNMD),
      *PINDEX(MAXNMD),MDCNT
@@ -125,39 +125,39 @@ C
       CHARACTER(1) CC,ST,BL
 
 
-	
+      	
       INUNIT=5
       OUNIT=1 
 
       OCOUNT=3
       IF ((N .LT. 1) .OR. (N .GT. MAXN)) THEN
-	    ind = 1501
+      	    ind = 1501
         GO TO 700
       ENDIF
 
       IF ((COLS .LT. 1) .OR. (COLS .GT. MAXCOL)) THEN
-	    ind = 1502
+      	    ind = 1502
         GO TO 700
       ENDIF
 
       IF ((BLKS .LT. 0) .OR. (BLKS .GT. MAXCOL)) THEN
-	    ind = 1502
+      	    ind = 1502
         GO TO 700
       ENDIF
 
       IF ((MXFAC .LT. 1) .OR. (MXFAC .GT. COLS)) THEN
-	    ind = 1503
+      	    ind = 1503
         GO TO 700
       ENDIF
 
       IF ((MXINT .LT. 1) .OR. (MXINT .GT. MXMXIN)) THEN
-	    ind = 1504
+      	    ind = 1504
         GO TO 700
       ENDIF
 
       IF ((MXINT .EQ. 3) .AND.
      & ((MXFAC*(MXFAC-1)*(MXFAC-2)/6) .GT. MAXTERM)) THEN
-	    ind = 1505
+      	    ind = 1505
         GO TO 700
       ENDIF
 
@@ -166,16 +166,16 @@ C
          NTOP=MAXNMD
        ENDIF
 
-	
+      	
       do 51 i = 1, MAXCOL
         PROB(i) = 0.0D0
 51    continue
-	
+      	
       do 52 i = 1,MAXNMD
         PTOP(i) = -1.0D0
         SIGMA(i)=0.0D0
 52    continue
-	
+      	
 
       ST='*'
       BL=' '
@@ -183,14 +183,14 @@ C
       MEAN=0.0
       S=0.0
       MDCNT=0
-	    CONTAM=0
-	    t0=1+blks
-	    ef=0	   
-
+      CONTAM=0
+      t0=1+blks
+      ef=0
+                              
       DO 15 I=1,NTOP
         PINDEX(I)=I
 15      CONTINUE
-	    DO 100 M=1,N
+      	    DO 100 M=1,N
         MEAN=MEAN+Y(M)                                                 
 100   continue    
       MEAN=MEAN/FLOAT(N)
@@ -205,7 +205,7 @@ C
  200  IF (.NOT. ALL) THEN
 
 C     AUGMENT WITH INTERACTION COLUMNS                                  
-     		                                                                  
+           		                                                                  
       MDCNT=MDCNT+1
       DO 210 I=1,N                                                      
        A(I,1)=1.0                                                            
@@ -225,23 +225,23 @@ C     AUGMENT WITH INTERACTION COLUMNS
            DO 230 I=1,N                                                 
               A(I,NTERM)=A(I,MULT(1)+1+BLKS)*A(I,MULT(2)+1+BLKS)
  230       continue
-		  DO 240 II=3,M
+      		  DO 240 II=3,M
              DO 240 I=1,N
             A(I,NTERM)=A(I,NTERM)*A(I,MULT(II)+1+BLKS)
  240       continue
-		  CALL INCREM(MULT,PART,M,NFAC,MAXCOL)
+      		  CALL INCREM(MULT,PART,M,NFAC,MAXCOL)
            GO TO 220
-      ENDIF		   	                                                            
+      ENDIF                	   	                                                            
  250  CONTINUE
 
 C      FORM X-PRIME-X MATRIX
 
-	
+      	
       NN=MIN(NTERM,N)
-	    IF (NN.LT.N) then
+      	    IF (NN.LT.N) then
  255  DO 270 I=1,NN                                                  
-      DO 270 J=I,NN
-		        AA(I,J)=0.0
+      DO 270 J=I,NN                                                 
+      		        AA(I,J)=0.0
         DO 260 M=1,N                                                    
          AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
  260    continue  
@@ -258,38 +258,38 @@ C      FORM X-PRIME-X MATRIX
         B(I)=0.0                                                        
         DO 320 M=1,N                                                    
           B(I)=B(I)+A(M,I)*Y(M) 
- 320	continue
+320   	continue
                                          
       CALL DPOCO(AA,MAXTERM,NN,COND,Z,INFO)
 
-	    IF (info.ne.0) THEN                                    
-	    IF (ef.eq.1) then  
-			GO TO 400
-	    else
-			NN=NN-1
-			go to 255
-	    ENDIF 
-	    ENDIF
-	
+      	    IF (info.ne.0) THEN                                    
+      	    IF (ef.eq.1) then  
+      			GO TO 400
+      	    else
+      			NN=NN-1
+      			go to 255
+      	    ENDIF 
+      	    ENDIF
+      	
       DO 271 I=1,NN
-	    DO 271 J=1,NN
-	    ATEM(I,J)=AA(I,J)                       
+      	    DO 271 J=1,NN
+      	    ATEM(I,J)=AA(I,J)                       
 271   continue
 
-	    CALL DPODI(ATEM, MAXTERM,NN,DET,10)
-	    IF (DET(2).LT. -3) THEN                                    
-	    IF (ef.eq.1) then  
-			GO TO 400
-	    else
-			 NN=NN-1
-			go to 255
-	    ENDIF                                                   
-	    ENDIF
-					
+      	    CALL DPODI(ATEM, MAXTERM,NN,DET,10)
+      	    IF (DET(2).LT. -3) THEN                                    
+      	    IF (ef.eq.1) then  
+      			GO TO 400
+      	    else
+      			 NN=NN-1
+      			go to 255
+      	    ENDIF                                                   
+      	    ENDIF
+      					
       CALL DPOSL(AA,MAXTERM,NN,B)
-		
+      		
 
-	    SR=0.0                                                            
+      	    SR=0.0                                                            
       SR2=0.0
       DO 340 M=1,N                                                      
         RES(M)=Y(M)
@@ -298,83 +298,83 @@ C      FORM X-PRIME-X MATRIX
  330   continue
          SR2=SR2+RES(M)**2
  340   continue
-	    If (mdcnt.eq.1) then 
-	    s=SR2
-	    endif 
-	    QI0=SR2/S
+      	    If (mdcnt.eq.1) then 
+      	    s=SR2
+      	    endif 
+      	    QI0=SR2/S
        ti=nn-t0
-          SIGMA(MDCNT)=SR2/(N-NN)	
-		  ZZ=(1-QI0**(-1))*(ti+t0)/(N+1)
-	    P1=(ti+1)/2.
-	    P2=(N-t0)/2.
-	    P3=(ti+3)/2.
-		  CALL HYP(ZZ,P1,P2,P3,RE,IM)
-		  IF (IM.EQ.0) THEN
-			 IPER=RE
+          SIGMA(MDCNT)=SR2/(N-NN)                                    
+      		  ZZ=(1-QI0**(-1))*(ti+t0)/(N+1)
+      	    P1=(ti+1)/2.
+      	    P2=(N-t0)/2.
+      	    P3=(ti+3)/2.
+      		  CALL HYP(ZZ,P1,P2,P3,RE,IM)
+      		  IF (IM.EQ.0) THEN
+      			 IPER=RE
        ENDIF
 
-      coef1=(N+1.0D0)
-      coef5=(ti+t0)	
+      coef1=(N+1.0D0)                                                    
+      coef5=(ti+t0)
       coef2=(-(ti)/2.0D0)
       coef3=(-(N-t0)/2.0D0)
       coef4=(ti+1.0D0)
       coef6=(coef1**(coef2))
       coef7=((coef5)**(-coef2))
-	    BFI0(MDCNT)=coef6*coef7*(QI0**(coef3))
-     * 	/coef4*IPER
-	    ELSE
-		  do 323 i=1,nterm
+      	    BFI0(MDCNT)=coef6*coef7*(QI0**(coef3))
+     */coef4*IPER
+      	    ELSE
+      		  do 323 i=1,nterm
       	b(i)=0.0
-323	    continue 
-		  BFI0(MDCNT)=0.0D0
-		  CONTAM=CONTAM+1
-	    ENDIF
-		
+323   	    continue 
+      		  BFI0(MDCNT)=0.0D0
+      		  CONTAM=CONTAM+1
+      	    ENDIF
+      		
        par1=abeta+nfac-1
-	     par2=bbeta+cols-nfac-1
-	     par3=abeta-1
-	     par4=bbeta+cols-1
+      	     par2=bbeta+cols-nfac-1
+      	     par3=abeta-1
+      	     par4=bbeta+cols-1
+      
+      	    CALL Fact(par1,par1f)
+      	    CALL Fact(par2,par2f)
+      	    CALL Fact(par3,par3f)
+      	    CALL Fact(par4,par4f)
+      	    PI0=(par1f*par2f)/(par3f*par4f)
 
-	    CALL Fact(par1,par1f)
-	    CALL Fact(par2,par2f)
-	    CALL Fact(par3,par3f)
-	    CALL Fact(par4,par4f)
-	    PI0=(par1f*par2f)/(par3f*par4f)
-
-	    PMI0(MDCNT)=PI0*BFI0(MDCNT)
+      	    PMI0(MDCNT)=PI0*BFI0(MDCNT)
             WCRIT=PSCAL*BIG
 
-		  CALL IDLOW(PTOP,MAXNMD,NTOP,NLOW,WCRIT)
-		  		
-			IF (PMI0(MDCNT).GT.WCRIT) then
-				PTOP(NLOW)=PMI0(MDCNT)
-				SIGTOP(NLOW)=SIGMA(MDCNT)
-				NFTOP(NLOW)=NFAC
-				DO 355 I=1,NFAC
- 					JTOP(NLOW,I)=JFAC(I)
+      	  	  CALL IDLOW(PTOP,MAXNMD,NTOP,NLOW,WCRIT)
+      		  		
+      			IF (PMI0(MDCNT).GT.WCRIT) then
+      				PTOP(NLOW)=PMI0(MDCNT)
+      				SIGTOP(NLOW)=SIGMA(MDCNT)
+      				NFTOP(NLOW)=NFAC
+      				DO 355 I=1,NFAC
+      					JTOP(NLOW,I)=JFAC(I)
  355              continue
-			ENDIF
+      			ENDIF
 
-	      DO 360 I=1,NFAC
+      	      DO 360 I=1,NFAC
                PROB(JFAC(I))=PROB(JFAC(I))+PMI0(MDCNT)
  360        continue   
-			IF(NFAC.EQ.0) then
-				PROB0=PMI0(1)
-			endif 
+      			IF(NFAC.EQ.0) then
+      				PROB0=PMI0(1)
+      			endif 
         
- 400	CALL INCREM(JFAC,ALL,NFAC,COLS,MAXCOL)
+ 400  	CALL INCREM(JFAC,ALL,NFAC,COLS,MAXCOL)
          GO TO 200
       ENDIF
  420  CONTINUE
-	
-	    SUM=0.0D0
-	    DO 444 i=2,MDCNT
-	    SUM=SUM+PMI0(i)
+      	
+      	    SUM=0.0D0
+      	    DO 444 i=2,MDCNT
+      	    SUM=SUM+PMI0(i)
  444  continue 
-	
-	    DO 446 I=1,MDCNT 
- 	    PMI0(I)=PMI0(I)/(1.0D0+SUM) 
- 446	continue 
+      	
+      	    DO 446 I=1,MDCNT 
+      	    PMI0(I)=PMI0(I)/(1.0D0+SUM) 
+ 446  	continue 
 
       OCOUNT=OCOUNT+1
       OCOUNT=MOD(OCOUNT,LS)
@@ -404,7 +404,7 @@ C Whatever is printed is an output subroutine parameter
             ojtop(i,j) = JTOP(PINDEX(I),J)
 452     continue 
 450   continue
-		  oprob(1)=prob0/(1.D0+sum)
+      		  oprob(1)=prob0/(1.D0+sum)
       do 459 i = 1, cols
         oprob(i+1) = prob(i)/(1.D0+sum)
 459   continue 
@@ -418,80 +418,80 @@ C Whatever is printed is an output subroutine parameter
 
 C	    CLOSE(OUNIT)
 
- 1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
-     &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
-     &1X,'ALL RIGHTS RESERVED;    JUNE 1996')
- 1001 FORMAT(A1,'X-MATRIX',/,' --------')
- 1002 FORMAT(' ',I3,15(1X,F7.3))
- 1003 FORMAT(A1,'Y-VECTOR',/,' --------')
- 1004 FORMAT(' ',I3,1X,F10.4)
- 1005 FORMAT(1X,'WEIGHT= ',E16.6E2,' FACTORS: ',30(1X,I2))
- 1100 FORMAT(A1,'NO. OF',3X,'NO. OF',2X,'NO. OF',12X,'MAX ORDER',5X,
-     &'MAX NO. OF',5X,'TOTAL NO. OF',/,' RUNS',5X,'FACTORS',2X,'BLOCKS',
-     &4X,'PI',4X,'INTERACTION',3X,'ACTIVE FACTORS',5X,'MODELS')
- 1101 FORMAT(' ',100('-'))
- 1102 FORMAT(A1,5X,'GAMMA',12X,'PGAM')
- 1103 FORMAT(1X,F10.3,E16.6E2,2X,'+',20(A1),'+')
- 1104 FORMAT(1X,I3,I10,I8,F10.3,I9,I15,I18)
- 1105 FORMAT(A1,' BEST ',I3,' MODELS',//,1X,'PROBABILITY   SIGMA-SQ ',
-     &' NO OF FACTORS   FACTORS')
- 1106 FORMAT(1X,F10.6,F12.4,I6,10X,30(1X,I2))
- 1107 FORMAT(A1,5X,'POSTERIOR PROBABILITIES',
-     &/,' FACTOR',5X,'POST. PROB.')
- 1108 FORMAT(' NONE',F14.3)
- 1109 FORMAT(' ',I4,F14.3,2X,'+',20(A1),'+')
- 1110 FORMAT(A1,11X,'POSTERIOR PROBABILITIES FOR EACH GAMMA VALUE',/)
- 1111 FORMAT(1X,'FACTOR',12(F10.2))
- 1112 FORMAT(' NONE',2X,12(F10.3))
- 1113 FORMAT(' ',I4,2X,12(F10.3))
- 1114 FORMAT(' NONE',F14.3,2X,'+',20(A1),'+')
- 1115 FORMAT(' ',3X,15(1X,F7.3))
- 1116 FORMAT(A1,'POSTERIOR PROBABILITIES WEIGHT-AVERAGED OVER GAMMA',
-     &/,' FACTOR',5X,'POST. PROB.')
- 1117 FORMAT(/,1X,'GAMMA= ',F8.3,'   GAMMA2= ',F8.3,'  NORM= ',E16.6E2)
- 1118 FORMAT(/,1X,'GAMMA= ',F8.3,' TO ',F8.3,' BY ',F6.4,' INCREMENTS')
- 1500 FORMAT(' ***** ERROR *****')
- 1501 FORMAT(1X,'N=',I8,' OUT OF RANGE',/,
-     &' N MUST BE BETWEEN 1 AND ',I4,/)
- 1502 FORMAT(1X,'NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 1 AND ',I4,/)
- 1503 FORMAT(1X,'MAX. NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 1 AND TOTAL NO. OF FACTORS= ',I4,/)
- 1504 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 1 AND ',I4,/)
- 1505 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' RESULTS IN TOO',/,
-     &' MANY COLUMNS FOR NO. OF FACTORS = ',I4,/)
- 1506 FORMAT(1X,'PI = ',F8.4,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 0 AND 1',/)
- 1507 FORMAT(1X,'GAMMA INDICATOR = ',I6,' OUT OF RANGE',/,
-     &' MUST BE EITHER 0 OR 1',/)
- 1508 FORMAT(1X,'GAMMA  = ',I6,' OUT OF RANGE',/,
-     &' MUST BE POSITIVE',/)
- 1509 FORMAT(1X,'NO. OF GAMMAS FOR SEARCH  = ',I6,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 2 AND ',I5,/)
- 1510 FORMAT(1X,'GAMMA(FIRST) = ',F12.4,' GAMMA(LAST)= ',F12.4,/,
-     &' GAMMA(FIRST) MUST BE LESS THAN GAMMA(LAST)',/)
- 1511 FORMAT(' **** WARNING: SINGULAR MATRIX ENCOUNTERED ****')
- 1512 FORMAT(' **** WARNING: MAX NUMBER OF FACTORS TOO LARGE ****',
-     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I3,' TO',I3,/)
- 1513 FORMAT(' **** WARNING: NUMBER OF INDIVIDUAL MODELS TOO BIG ****',
-     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I4,' TO',I4,/)
- 1305 FORMAT(1X,'DET:',E16.6E3,' SR:',E16.6E3,' S:',E16.6E3,
-     &' EXPON:',E16.6E3)
+C 1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
+C     &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
+C     &1X,'ALL RIGHTS RESERVED;    JUNE 1996')
+C 1001 FORMAT(A1,'X-MATRIX',/,' --------')
+C 1002 FORMAT(' ',I3,15(1X,F7.3))
+C 1003 FORMAT(A1,'Y-VECTOR',/,' --------')
+C 1004 FORMAT(' ',I3,1X,F10.4)
+C 1005 FORMAT(1X,'WEIGHT= ',E16.6E2,' FACTORS: ',30(1X,I2))
+C 1100 FORMAT(A1,'NO. OF',3X,'NO. OF',2X,'NO. OF',12X,'MAX ORDER',5X,
+C     &'MAX NO. OF',5X,'TOTAL NO. OF',/,' RUNS',5X,'FACTORS',2X,'BLOCKS',
+C     &4X,'PI',4X,'INTERACTION',3X,'ACTIVE FACTORS',5X,'MODELS')
+C 1101 FORMAT(' ',100('-'))
+C 1102 FORMAT(A1,5X,'GAMMA',12X,'PGAM')
+C 1103 FORMAT(1X,F10.3,E16.6E2,2X,'+',20(A1),'+')
+C 1104 FORMAT(1X,I3,I10,I8,F10.3,I9,I15,I18)
+C 1105 FORMAT(A1,' BEST ',I3,' MODELS',//,1X,'PROBABILITY   SIGMA-SQ ',
+C     &' NO OF FACTORS   FACTORS')
+C 1106 FORMAT(1X,F10.6,F12.4,I6,10X,30(1X,I2))
+C 1107 FORMAT(A1,5X,'POSTERIOR PROBABILITIES',
+C     &/,' FACTOR',5X,'POST. PROB.')
+C 1108 FORMAT(' NONE',F14.3)
+C 1109 FORMAT(' ',I4,F14.3,2X,'+',20(A1),'+')
+C 1110 FORMAT(A1,11X,'POSTERIOR PROBABILITIES FOR EACH GAMMA VALUE',/)
+C 1111 FORMAT(1X,'FACTOR',12(F10.2))
+C 1112 FORMAT(' NONE',2X,12(F10.3))
+C 1113 FORMAT(' ',I4,2X,12(F10.3))
+C 1114 FORMAT(' NONE',F14.3,2X,'+',20(A1),'+')
+C 1115 FORMAT(' ',3X,15(1X,F7.3))
+C 1116 FORMAT(A1,'POSTERIOR PROBABILITIES WEIGHT-AVERAGED OVER GAMMA',
+C     &/,' FACTOR',5X,'POST. PROB.')
+C 1117 FORMAT(/,1X,'GAMMA= ',F8.3,'   GAMMA2= ',F8.3,'  NORM= ',E16.6E2)
+C 1118 FORMAT(/,1X,'GAMMA= ',F8.3,' TO ',F8.3,' BY ',F6.4,' INCREMENTS')
+C 1500 FORMAT(' ***** ERROR *****')
+C 1501 FORMAT(1X,'N=',I8,' OUT OF RANGE',/,
+C     &' N MUST BE BETWEEN 1 AND ',I4,/)
+C 1502 FORMAT(1X,'NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
+C     &' MUST BE BETWEEN 1 AND ',I4,/)
+C 1503 FORMAT(1X,'MAX. NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
+C     &' MUST BE BETWEEN 1 AND TOTAL NO. OF FACTORS= ',I4,/)
+C 1504 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' OUT OF RANGE',/,
+C     &' MUST BE BETWEEN 1 AND ',I4,/)
+C 1505 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' RESULTS IN TOO',/,
+C     &' MANY COLUMNS FOR NO. OF FACTORS = ',I4,/)
+C 1506 FORMAT(1X,'PI = ',F8.4,' OUT OF RANGE',/,
+C     &' MUST BE BETWEEN 0 AND 1',/)
+C 1507 FORMAT(1X,'GAMMA INDICATOR = ',I6,' OUT OF RANGE',/,
+C     &' MUST BE EITHER 0 OR 1',/)
+C 1508 FORMAT(1X,'GAMMA  = ',I6,' OUT OF RANGE',/,
+C     &' MUST BE POSITIVE',/)
+C 1509 FORMAT(1X,'NO. OF GAMMAS FOR SEARCH  = ',I6,' OUT OF RANGE',/,
+C     &' MUST BE BETWEEN 2 AND ',I5,/)
+C 1510 FORMAT(1X,'GAMMA(FIRST) = ',F12.4,' GAMMA(LAST)= ',F12.4,/,
+C     &' GAMMA(FIRST) MUST BE LESS THAN GAMMA(LAST)',/)
+C 1511 FORMAT(' **** WARNING: SINGULAR MATRIX ENCOUNTERED ****')
+C 1512 FORMAT(' **** WARNING: MAX NUMBER OF FACTORS TOO LARGE ****',
+C     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I3,' TO',I3,/)
+C 1513 FORMAT(' **** WARNING: NUMBER OF INDIVIDUAL MODELS TOO BIG ****',
+C     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I4,' TO',I4,/)
+C 1305 FORMAT(1X,'DET:',E16.6E3,' SR:',E16.6E3,' S:',E16.6E3,
+C     &' EXPON:',E16.6E3)
       RETURN
       END
 
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-	    SUBROUTINE FACT(INPUT,OUTPUT)
-	    INTEGER input,i
-	    DOUBLE PRECISION output
-	    output=1
-	    do  i=2,input
-	    output=output*i
-	    end do 
-	    return
-	    end
+      	    SUBROUTINE FACT(INPUT,OUTPUT)
+      	    INTEGER input,i
+      	    DOUBLE PRECISION output
+      	    output=1
+      	    do  i=2,input
+      	    output=output*i
+      	    end do 
+      	    return
+      	    end
 
 
       SUBROUTINE IDLOW(PTOP,MAXNMD,NTOP,K,P)
@@ -560,7 +560,7 @@ C       IN LEXICAL ORDER (1,2,3,...,R)
  402     continue
       RETURN                                                            
       END
-	                                                           
+      	                                                           
                                                                   
       SUBROUTINE DPOCO(A,LDA,N,RCOND,Z,INFO)
       INTEGER LDA,N,INFO                                                
@@ -756,7 +756,7 @@ C        SOLVE R*Z = V
       RETURN                                                            
       END                                                               
       
-	    SUBROUTINE DPODI(A,LDA,N,DET,JOB)                                 
+      	    SUBROUTINE DPODI(A,LDA,N,DET,JOB)                                 
       INTEGER LDA,N,JOB
       DOUBLE PRECISION A(LDA,N)                                         
       DOUBLE PRECISION DET(2)                                           
@@ -1080,10 +1080,10 @@ C       AND LY IS DEFINED IN A SIMILAR WAY USING INCY.
       	 ELSE 
       		GO TO 60
       	 ENDIF
-      ELSE
-      GO TO 5	 
-      ENDIF
-	 	                                 
+      ELSE                                          
+      GO TO 5	                                                                                   
+      ENDIF                                   
+      	 	                                                                              
     5 CONTINUE                                                          
                                                                        
 C        CODE FOR NONEQUAL OR NONPOSITIVE INCREMENTS.                   
@@ -1139,7 +1139,7 @@ C     DEFINED IN A SIMILAR WAY USING INCY.
       DOUBLE PRECISION DX(N),DY(N)
       DDOT = 0.D0                                                       
       IF(N.LE.0)RETURN 
-	                                                 
+      	                                                 
       IF(INCX.EQ.INCY) THEN
       	 IF((INCX-1).LT.0) THEN 
       	    GO TO 5
@@ -1149,7 +1149,7 @@ C     DEFINED IN A SIMILAR WAY USING INCY.
       		GO TO 60
       	 ENDIF
       ELSE
-      GO TO 5	 
+      GO TO 5	                                                                      
       ENDIF
 
     5 CONTINUE                                                          
@@ -1307,9 +1307,9 @@ C
    20 continue   
    30 IF(kk.eq.1) then
          go to 100
-	    else if(kk.eq.2) then
-	    go to 200
-	    endif                                                       
+      	    else if(kk.eq.2) then
+      	    go to 200
+      	    endif                                                       
 C                                                                       
 C SORT X ONLY                                                           
 C                                                                       
@@ -1319,7 +1319,7 @@ C
       J=NN
       R=.375                                                            
   110 IF (I .EQ. J) GO TO 155                                           
-  115 IF (R .GT. .5898437) GO TO 120                                    
+      IF (R .GT. .5898437) GO TO 120                                    
       R=R+3.90625E-2                                                    
       GO TO 125                                                         
   120 R=R-.21875                                                        
@@ -1402,7 +1402,7 @@ C
       J=NN                                                              
       R=.375
   210 IF (I .EQ. J) GO TO 255                                           
-  215 IF (R .GT. .5898437) GO TO 220
+      IF (R .GT. .5898437) GO TO 220
       R=R+3.90625E-2                                                    
       GO TO 225                                                         
   220 R=R-.21875                                                        
@@ -5679,11 +5679,11 @@ C     OPEN(OUT,FILE="MDPrint.out")
       BL = cBL
       COLS = cCOLS
       CUT = cCUT
-	    eps=0.0D-5
-	    ef=0    
-	      
-	    do 8 i = 1, N
-        do 8 j = 1, (BL+COLS)
+      	    eps=0.0D-5
+      	    ef=0    
+      	      
+      	    do 8 i = 1, N
+        do 8 j = 1, (BL+COLS)                                                                                                              
        X(i,j) = cX(i,j)
 8       continue
       do 5 i = 1, NM
@@ -5696,10 +5696,10 @@ C     OPEN(OUT,FILE="MDPrint.out")
 5     continue
 
       BESTI=0
-	
+      	
       do 17 i = 1, MXSTRT
        DTOP(i) = 0.0D0
-17	  continue
+17    	  continue
 
       DO 190 IM=1,NM
 
@@ -5711,27 +5711,27 @@ C     AUGMENT CANDIDATE MATRIX WITH INTERACTION COLUMNSC
  925     IF (.NOT. PART) THEN
            TOTO=TOTO+1
            DO 930 I=1,N
-			X(I,TOTO)=X(I,MULT(1)+BL)*X(I,MULT(2)+BL)
+      			X(I,TOTO)=X(I,MULT(1)+BL)*X(I,MULT(2)+BL)
  930       continue     
            DO II=3,M
              DO I=1,N
                 X(I,TOTO)=X(I,TOTO)*X(I,MULT(II)+BL)
              end do 
            end do
-		  CALL INVREM2(MULT,PART,M,COLS)
+      		  CALL INVREM2(MULT,PART,M,COLS)
            GO TO 925
          ENDIF
  920  CONTINUE
 
 
-	      
-	    TK=NF(IM)
+      	      
+      	    TK=NF(IM)
       DO 110 I=1,N0
        A(I,1)=1.0                                                       
        DO 115 J=1,BL                                                    
          A(I,1+J)=X0(I,J)
  115   continue
-	 DO 110 J=1,TK                                                    
+      	 DO 110 J=1,TK                                                    
          A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)                                
  110   continue 
       TOTO=TK+1+BL
@@ -5748,12 +5748,12 @@ C     AUGMENT WITH INTERACTION COLUMNS
            DO 130 I=1,N0
              A(I,TOTO)=A(I,MULT(1)+1+BL)*A(I,MULT(2)+1+BL)
  130       continue 
-	     DO II=3,M
+      	     DO II=3,M
              DO I=1,N0
                A(I,TOTO)=A(I,TOTO)*A(I,MULT(II)+1+BL)
              end do
            end do  
-	     CALL INVREM2(MULT,PART,M,TK)
+      	     CALL INVREM2(MULT,PART,M,TK)
            GO TO 125
          ENDIF
  120  CONTINUE
@@ -5763,7 +5763,7 @@ C     AUGMENT WITH INTERACTION COLUMNS
 C      FORM X-PRIME-X MATRIX
 
       NN=MIN(N0,TOTO)
- 143	DO I=1,NN
+143   	DO I=1,NN
       DO J=I,NN
         AA(I,J)=0.0
         DO 145 M=1,N0
@@ -5773,47 +5773,47 @@ C      FORM X-PRIME-X MATRIX
       end do 
       end do 
 
-	    DO I=1,NN
+      	    DO I=1,NN
       B(I)=0.0
-		  DO M=1,N0
-			B(I)=B(I)+A(M,I)*Y0(M)
- 		  end do
+      		  DO M=1,N0
+      			B(I)=B(I)+A(M,I)*Y0(M)
+      		  end do
       end do 
+      
+      	    CALL DPOCO(AA,MAXCOL,NN,RCOND,Z,INFO)
 
-	    CALL DPOCO(AA,MAXCOL,NN,RCOND,Z,INFO)
-
-	    IF (info.ne.0) THEN                                    
-	    IF (ef.eq.1) then  
-			GO TO 190
-	    else
-			NN=NN-1
-			go to 143
-	    ENDIF 
-	    ENDIF
-	                    
-	    CALL DPODI(AA, MAXCOL,NN,DET,11)
-
-	    IF (DET(2).LT. -3) THEN                                    
-	    IF (ef.eq.1) then  
-			GO TO 190
-	    else
-			NN=NN-1
-			go to 143
-	    ENDIF                                                   
-	    ENDIF
-					
- 	
+      	    IF (info.ne.0) THEN                                    
+      	    IF (ef.eq.1) then  
+      			GO TO 190
+      	    else
+      			NN=NN-1
+      			go to 143
+      	    ENDIF 
+      	    ENDIF
+      	                    
+      	    CALL DPODI(AA, MAXCOL,NN,DET,11) 
+      
+      	    IF (DET(2).LT. -3) THEN                                    
+      	    IF (ef.eq.1) then  
+      			GO TO 190
+      	    else
+      			NN=NN-1
+      			go to 143
+      	    ENDIF                                                   
+      	    ENDIF
+      					
+      	
       DO I=1,NN
         BETA(IM,I)=0.0
         DO  J=1,NN
           IF (I .GT. J) AA(I,J)=AA(J,I)
           BETA(IM,I)=BETA(IM,I)+AA(I,J)*B(J)
           G(IM,I,J)=AA(I,J)
-	    end do 
-	    end do 
+      	    end do 
+      	    end do 
 
  190  CONTINUE
-	
+      	
 
 
       NDTOP=1
@@ -5825,7 +5825,7 @@ C      FORM X-PRIME-X MATRIX
         FLAG = 100
       ELSE
         do 791 I=1,NRUNS
-	       BEST(I) = MBEST(ISTART,I)
+      	       BEST(I) = MBEST(ISTART,I)
  791    continue  
          FLAG = 200
       ENDIF
@@ -5838,7 +5838,7 @@ C      FORM X-PRIME-X MATRIX
       IF (DTOP(IJ) .LT. DBEST) THEN
         DESIN=.FALSE.
         DO 207 I=1,NRUNS
-		  XBEST(I)=DFLOAT(BEST(I))
+      		  XBEST(I)=DBLE(BEST(I))
  207    continue 
         CALL SSORT(XBEST,BEST,NRUNS,2)
         DO 209 J=1, NDTOP-1
@@ -5846,9 +5846,9 @@ C      FORM X-PRIME-X MATRIX
      &    (DESIN .EQV. .FALSE.)) THEN
             IZ=0
             DO 208 I=1,NRUNS
-		       IZ=IZ+IABS(TOPROW(J,I)-BEST(I))
+      		       IZ=IZ+IABS(TOPROW(J,I)-BEST(I))
  208           continue
-		  IF (IZ .EQ. 0) DESIN=.TRUE.
+      		  IF (IZ .EQ. 0) DESIN=.TRUE.
           ENDIF
  209    CONTINUE
         IF (DESIN .EQV. .FALSE.) THEN
@@ -5870,7 +5870,7 @@ C     NOW START EXCHANGE ITERATIONS
       M=M+1
       N1=NRUNS+1
       DO 410 I=1,NRUNS
-	    ROWS(I)=BEST(I)
+      	    ROWS(I)=BEST(I)
  410  continue
 C     FIRST CYCLE THROUGH THE N POSSIBLE ADDITIONAL POINTS              
 
@@ -5897,9 +5897,9 @@ C     THEN CYCLE THROUGH THE (NRUNS+1) POSSIBLE DELETED POINTS
       IF (DTOP(IJ) .LT. D) THEN
         DESIN=.FALSE.
         DO 466 II=1,NRUNS                                                                                         
-	     XBEST(II)=DFLOAT(ROWS(II))                                    
+      	     XBEST(II)=DBLE(ROWS(II))                                    
  466    continue 
-	    CALL SSORT(XBEST,ROWS,NRUNS,2)                                  
+      	    CALL SSORT(XBEST,ROWS,NRUNS,2)                                  
         DO 468 JJ=1,NDTOP-1
           IF ((DABS((DTOP(JJ)-D)/DTOP(JJ)) .LT. 0.00001) .AND.
      &    (DESIN .EQV. .FALSE.)) THEN
@@ -5907,7 +5907,7 @@ C     THEN CYCLE THROUGH THE (NRUNS+1) POSSIBLE DELETED POINTS
             DO 467 II=1,NRUNS
            IZ=IZ+IABS(TOPROW(JJ,II)-ROWS(II))
  467        continue   
-	      IF (IZ .EQ. 0) DESIN=.TRUE.
+      	      IF (IZ .EQ. 0) DESIN=.TRUE.
           ENDIF
  468    CONTINUE
         IF (DESIN .EQV. .FALSE.) THEN
@@ -5948,7 +5948,7 @@ C     WRITE(OUT,1101)
       ND=MIN0(MXSTRT,NDTOP-1)                                                 
       DO 701 I=1,ND
          ITOP(I)=I
- 701	continue                                                        
+ 701  	continue                                                        
       CALL SSORT(DTOP,ITOP,ND,-2)                                       
 CC      WRITE(OUT,1209)
 C      WRITE(*,1206) ND
@@ -5962,45 +5962,45 @@ ccccccccccccc
       DO  J = 1,NTOP
         TOPD(J) = DTOP(J)
         DO  K=1,NRUNS
-           TOPDES(J,K) = TOPROW(ITOP(J),K)	
+           TOPDES(J,K) = TOPROW(ITOP(J),K)                                  	
         end do
       end do 
 
- 800  FORMAT(7X,' FORTRAN PROGRAM MD: BAYESIAN DESIGN OF EXPERIMENTS',/,                
-     &3X,'FOLLOWUP DESIGN / WYNN EXCHANGE / RANDOM START',/,            
-     &7X,'WRITTEN BY DAN MEYER',/,7X,'ALL RIGHTS RESERVED',/)
- 1000 FORMAT(2X,'          NO OF    NO OF  MAX ORDER',
-     &     /,2X,'  N0     FACTORS   BLOCKS INTERACTION  ',
-     &'  GAMMA(MAIN)  GAMMA(INT)  NMODELS')                             
- 1001 FORMAT(1X,I6,I8,I9,I10,F15.3,F12.3,I12,//)                        
- 1002 FORMAT(1X,'NO OF       NO OF   MAX          NO OF RANDOM',/,
-     &       1X,'CANDIDATES  RUNS    ITERATIONS   STARTS')
- 1003 FORMAT(1X,I5,I9,I9,I12,//)                                        
- 1004 FORMAT(2X,'MODEL',8X,'PROB',7X,'SIGSQ',3X,'SIZE',3X,'FACTORS')    
- 1005 FORMAT(1X,I6,F12.5,F12.4,I7,3X,12(I4))
- 1101 FORMAT(1X,100('-'))
- 1102 FORMAT(1X,'CANDIDATE RUNS',/,1X,'--------------')
- 1103 FORMAT(1X,I3,2X,12(F5.2,1X))
- 1104 FORMAT(1X,I3,2X,I5,F8.5,5X,10(I3,1X))
- 1105 FORMAT('1MODEL  SIZE   PROB    FACTORS')
- 1006 FORMAT(/,' PROGRAM DONE')
- 1199 FORMAT(/,1X,'RANDOM START NUMBER:',I3,/)
- 1200 FORMAT(//,5X,'ITERATION    D',6X,'DESIGN(ROWS)',/,
-     &5X,9('-'),2X,5('-'),4X,98('-'))
- 1203 FORMAT(//,5X,'*** MAX ITERATIONS REACHED ***')
- 1204 FORMAT(1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
- 1205 FORMAT(1X,I3,2X,I3,2X,12(F5.2,1X))
- 1201 FORMAT(5X,I6,F13.4,2X,24(I4),/,25X,24(I4))
+C800  FORMAT(7X,' FORTRAN PROGRAM MD: BAYESIAN DESIGN OF EXPERIMENTS',/,                
+C     &3X,'FOLLOWUP DESIGN / WYNN EXCHANGE / RANDOM START',/,            
+C     &7X,'WRITTEN BY DAN MEYER',/,7X,'ALL RIGHTS RESERVED',/)
+C1000 FORMAT(2X,'          NO OF    NO OF  MAX ORDER',
+C     &     /,2X,'  N0     FACTORS   BLOCKS INTERACTION  ',
+C     &'  GAMMA(MAIN)  GAMMA(INT)  NMODELS')                             
+C1001 FORMAT(1X,I6,I8,I9,I10,F15.3,F12.3,I12,//)                        
+C1002 FORMAT(1X,'NO OF       NO OF   MAX          NO OF RANDOM',/,
+C     &       1X,'CANDIDATES  RUNS    ITERATIONS   STARTS')
+C1003 FORMAT(1X,I5,I9,I9,I12,//)                                        
+C1004 FORMAT(2X,'MODEL',8X,'PROB',7X,'SIGSQ',3X,'SIZE',3X,'FACTORS')    
+C1005 FORMAT(1X,I6,F12.5,F12.4,I7,3X,12(I4))
+C1101 FORMAT(1X,100('-'))
+C1102 FORMAT(1X,'CANDIDATE RUNS',/,1X,'--------------')
+C1103 FORMAT(1X,I3,2X,12(F5.2,1X))
+C1104 FORMAT(1X,I3,2X,I5,F8.5,5X,10(I3,1X))
+C1105 FORMAT('1MODEL  SIZE   PROB    FACTORS')
+C1006 FORMAT(/,' PROGRAM DONE')
+C 1199 FORMAT(/,1X,'RANDOM START NUMBER:',I3,/)
+C 1200 FORMAT(//,5X,'ITERATION    D',6X,'DESIGN(ROWS)',/,
+C     &5X,9('-'),2X,5('-'),4X,98('-'))
+C 1203 FORMAT(//,5X,'*** MAX ITERATIONS REACHED ***')
+C 1204 FORMAT(1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
+C 1205 FORMAT(1X,I3,2X,I3,2X,12(F5.2,1X))
+C 1201 FORMAT(5X,I6,F13.4,2X,24(I4),/,25X,24(I4))
 C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
- 1202 FORMAT(//,5X,'*** CONVERGENCE ***',//)
- 1206 FORMAT(1X,'*  THE ',I4,' BEST DESIGNS  *')
- 1207 FORMAT(1X,//,1X,'DESIGN ',I3,' D= ',F13.4,/,
-     &       1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
- 1209 FORMAT(1X,26('*'))
- 1210 FORMAT(//,8X,'RANK         D',6X,'DESIGN(ROWS)',/,
-     &8X,4('-'),7X,5('-'),4X,98('-'))
- 1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
-     &' QF(J,I)  N*  TERM(I,J)')
+C 1202 FORMAT(//,5X,'*** CONVERGENCE ***',//)
+C 1206 FORMAT(1X,'*  THE ',I4,' BEST DESIGNS  *')
+C 1207 FORMAT(1X,//,1X,'DESIGN ',I3,' D= ',F13.4,/,
+C     &       1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
+C 1209 FORMAT(1X,26('*'))
+C 1210 FORMAT(//,8X,'RANK         D',6X,'DESIGN(ROWS)',/,
+C     &8X,4('-'),7X,5('-'),4X,98('-'))
+C 1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
+C     &' QF(J,I)  N*  TERM(I,J)')
 
 C     CLOSE(OUT)
 
@@ -6035,12 +6035,12 @@ C  THE FUNCTION RAND RETURNS A UNIFORM(0,1) DEVIATE;
 C  IF ANOTHER RANDOM NUMBER GENERATOR IS AVAILABLE THAT
 C  IS SET UP FOR THE MACHINE THIS IS RUNNING ON, IT CAN BE SUBSTITUTED
 
-   	  RR=R
+         	  RR=R
       DO 1 I=1,N1
         X=RANDO(RR)
         ROWS(I)=IDINT((N-1)*X)+1
  1    continue 
-	    RETURN
+      	    RETURN
       END
 
 
@@ -6069,7 +6069,7 @@ C
           DO 220 J=1,BL
              A(I,1+J)=X(ROWS(I),J)
  220      continue 
-          DO 215 J=1,TK
+          DO 215 J=1,TK                                                                                                           
              A(I,J+1+BL)=X(ROWS(I),JFAC(IM,J)+BL)
  215      continue 
         TOTO=TK+1+BL
@@ -6092,7 +6092,7 @@ C     AUGMENT WITH INTERACTION COLUMNS
      &  (I1-I0-1)*(COLS-I0)-(I1-I0-1)*(I1-I0)/2+I2-I1+BL
             ENDIF
            DO 235 I=1,N1
-				A(I,TOTO)=X(ROWS(I),CNO)
+      				A(I,TOTO)=X(ROWS(I),CNO)
  235       continue  
            CALL INVREM2(MULT,PART,M,TK)
            GO TO 230
@@ -6107,8 +6107,8 @@ C     AUGMENT WITH INTERACTION COLUMNS
        DO M=1,TOTO
          V(I,J)=V(I,J)+G(IM,I,M)*A(J,M)
        end do
-	     end do 
-	     end do 
+      	     end do 
+      	     end do 
 
       DO I=1,N1
       V2(I,I)=1.0
@@ -6117,22 +6117,22 @@ C     AUGMENT WITH INTERACTION COLUMNS
          DO M=1,TOTO
            V2(I,J)=V2(I,J)+A(I,M)*V(M,J)
          end do 
-	    end do
-	    end do 
+         end do
+      	    end do 
 
       DO I=1,N1
         DO  J=1,N1
           V(I,J)=V2(I,J)
       end do 
-	    end do 
+      	    end do 
 
 C     CALL DLINDS(N1,V2,32,V,32)
 
       CALL DPOCO(V,32,N1,RCOND,Z,INFO)
 
-	    IF (info.ne.0) THEN                                    
-	    ENDIF
-	
+      	      IF (info.ne.0) THEN                                    
+      	    ENDIF
+      	
       CALL DPODI(V,32,N1,DET,11)
 
 
@@ -6149,7 +6149,7 @@ C     CALL DLINDS(N1,V2,32,V,32)
         DO J=1,TOTO
           YHAT(IM,I)=YHAT(IM,I)+A(I,J)*BETA(IM,J)
         end do 
-	    end do
+      	    end do
 
  210  CONTINUE
 
@@ -6167,7 +6167,7 @@ C       WRITE(15,*) 'DES- ',ID,' 1ST MODEL PAIR MEMBER- ',IM
          TR2=TR2+0.5*(DV2(IM,I,J)*DV(JM,J,I))
          TR=TR+0.5*(DV(IM,I,J)*DV2(JM,J,I)+DV2(IM,I,J)*DV(JM,J,I))
         end do
-	      end do 
+      	      end do 
 
       DO I=1,N1
         W(I)=0.0
@@ -6176,25 +6176,25 @@ C       WRITE(15,*) 'DES- ',ID,' 1ST MODEL PAIR MEMBER- ',IM
           W(I)=W(I)+DV(JM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(IM)
           W1(I)=W1(I)+DV(IM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(JM)
       end do
-	    end do 
+      	    end do 
 
-	    DEV=0.0
+      	    DEV=0.0
       DEV1=0.0
       DEV2=0.0
       DO 330 I=1,N1
         DEV1=DEV1+(YHAT(IM,I)-YHAT(JM,I))*W1(I)
         DEV2=DEV2+(YHAT(IM,I)-YHAT(JM,I))*W(I)
  330  continue 
-	    DEV1=DEV1/2.0
+      	    DEV1=DEV1/2.0
       DEV2=DEV2/2.0
       DEV=(DEV1+DEV2)
   
-	    D0=P(IM)*P(JM)*(TR+DEV-N1)
+      	    D0=P(IM)*P(JM)*(TR+DEV-N1)
       D=D+D0
 C      WRITE(OUT,500) IM,JM,P(IM),P(JM),TR1,TR2,DEV1,DEV2,N1,D0
  301  CONTINUE
  300  continue  
- 500  FORMAT(1X,I3,I3,F7.4,F7.4,F8.2,F8.2,F8.2,F8.2,I3,F8.2)
+C 500  FORMAT(1X,I3,I3,F7.4,F7.4,F8.2,F8.2,F8.2,F8.2,I3,F8.2)
       RETURN
       END
 
@@ -6213,7 +6213,7 @@ C      WRITE(OUT,500) IM,JM,P(IM),P(JM),TR1,TR2,DEV1,DEV2,N1,D0
             DO 101 M=L+1,R
               J(M)=J(M-1)+1
  101        continue 
-	      OK=.TRUE.
+      	      OK=.TRUE.
          ELSE
             L=L-1
          ENDIF                                                          
