@@ -207,14 +207,15 @@ C
 C     AUGMENT WITH INTERACTION COLUMNS                                  
            		                                                                  
       MDCNT=MDCNT+1
-      DO 210 I=1,N                                                      
+      DO I=1,N                                                      
        A(I,1)=1.0                                                            
       DO 205 J=1,BLKS                                                   
         A(I,J+1)=X(I,J)
 205   continue
-      DO 210 J=1,NFAC
+      DO J=1,NFAC
         A(I,BLKS+J+1)=X(I,BLKS+JFAC(J))
-210   continue
+      END DO
+      END DO	
       NTERM=NFAC+1+BLKS                                                 
 
       DO 250 M=2,MIN(MXINT,NFAC)
@@ -225,10 +226,11 @@ C     AUGMENT WITH INTERACTION COLUMNS
            DO 230 I=1,N                                                 
               A(I,NTERM)=A(I,MULT(1)+1+BLKS)*A(I,MULT(2)+1+BLKS)
  230       continue
-      		  DO 240 II=3,M
-             DO 240 I=1,N
+      		  DO II=3,M
+             DO I=1,N
             A(I,NTERM)=A(I,NTERM)*A(I,MULT(II)+1+BLKS)
- 240       continue
+           END DO
+           END DO	
       		  CALL INCREM(MULT,PART,M,NFAC,MAXCOL)
            GO TO 220
       ENDIF                	   	                                                            
@@ -239,8 +241,8 @@ C      FORM X-PRIME-X MATRIX
       	
       NN=MIN(NTERM,N)
       	    IF (NN.LT.N) then
- 255  DO 270 I=1,NN                                                  
-      DO 270 J=I,NN                                                 
+ 255  DO I=1,NN                                                  
+      DO J=I,NN                                                 
       		        AA(I,J)=0.0
         DO 260 M=1,N                                                    
          AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
@@ -248,18 +250,20 @@ C      FORM X-PRIME-X MATRIX
         ATEM(I,J)=AA(I,J)
         ATEM(J,I)=AA(I,J)
         AA(J,I)=AA(I,J)
-270   continue
+      END DO
+      END DO 
 
-      DO 280 I=1,NN
-      DO 280 J=1,NN
+      DO  I=1,NN
+      DO  J=1,NN
           AA(I,J)=ATEM(I,J)
-280   continue 
-      DO 320 I=1,NN
+      END DO
+      END DO
+      DO  I=1,NN
         B(I)=0.0                                                        
-        DO 320 M=1,N                                                    
+        DO M=1,N                                                    
           B(I)=B(I)+A(M,I)*Y(M) 
-320   	continue
-                                         
+      END DO
+      END DO                                         
       CALL DPOCO(AA,MAXTERM,NN,COND,Z,INFO)
 
       	    IF (info.ne.0) THEN                                    
@@ -271,11 +275,11 @@ C      FORM X-PRIME-X MATRIX
       	    ENDIF 
       	    ENDIF
       	
-      DO 271 I=1,NN
-      	    DO 271 J=1,NN
+      DO  I=1,NN
+      	    DO  J=1,NN
       	    ATEM(I,J)=AA(I,J)                       
-271   continue
-
+      END DO
+      END DO
       	    CALL DPODI(ATEM, MAXTERM,NN,DET,10)
       	    IF (DET(2).LT. -3) THEN                                    
       	    IF (ef.eq.1) then  
@@ -5682,10 +5686,11 @@ C     OPEN(OUT,FILE="MDPrint.out")
       	    eps=0.0D-5
       	    ef=0    
       	      
-      	    do 8 i = 1, N
-        do 8 j = 1, (BL+COLS)                                                                                                              
+      	    do i = 1, N
+        do j = 1, (BL+COLS)                                                                                                              
        X(i,j) = cX(i,j)
-8       continue
+      END DO
+      END DO
       do 5 i = 1, NM
         NF(i) = cNF(i)
         SIGMA2(i) = cSIGMA2(i)
@@ -5726,14 +5731,15 @@ C     AUGMENT CANDIDATE MATRIX WITH INTERACTION COLUMNSC
 
       	      
       	    TK=NF(IM)
-      DO 110 I=1,N0
+      DO I=1,N0
        A(I,1)=1.0                                                       
        DO 115 J=1,BL                                                    
          A(I,1+J)=X0(I,J)
  115   continue
-      	 DO 110 J=1,TK                                                    
+      	 DO J=1,TK                                                    
          A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)                                
- 110   continue 
+      END DO
+      END DO 
       TOTO=TK+1+BL
       
 
@@ -6064,14 +6070,15 @@ C
       DO 210 IM=1,NM
         TK=NF(IM)
 C
-        DO 215 I=1,N1
+        DO  I=1,N1
           A(I,1)=1.0
           DO 220 J=1,BL
              A(I,1+J)=X(ROWS(I),J)
  220      continue 
-          DO 215 J=1,TK                                                                                                           
+          DO  J=1,TK                                                                                                           
              A(I,J+1+BL)=X(ROWS(I),JFAC(IM,J)+BL)
- 215      continue 
+        END DO
+        END DO 
         TOTO=TK+1+BL
 
 C     AUGMENT WITH INTERACTION COLUMNS

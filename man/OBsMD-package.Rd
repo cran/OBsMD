@@ -12,8 +12,8 @@ Implements the objective Bayesian methodology proposed in Consonni and Deldossi 
 \tabular{ll}{
 Package: \tab OBsMD\cr
 Type: \tab Package\cr
-Version: \tab 11.1\cr
-Date: \tab 2023-11-14\cr
+Version: \tab 12.0\cr
+Date: \tab 2024-08-19\cr
 License: \tab GPL version 3 or later\cr
 }
 The packages allows you to perform the calculations and analyses described

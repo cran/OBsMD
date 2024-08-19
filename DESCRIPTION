@@ -1,6 +1,6 @@
 Package: OBsMD
 Title: Objective Bayesian Model Discrimination in Follow-Up Designs
-Version: 11.1
+Version: 12.0
 Authors@R: c(person("Marta", "Nai Ruscone", role = c("aut", "cre"),
                     email = "marta.nairuscone@unige.it"),
              person("Laura", "Deldossi", role = c("aut")),
@@ -14,11 +14,11 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
 NeedsCompilation: yes
-Packaged: 2023-11-13 23:53:17 UTC; martanairuscone
+Packaged: 2024-08-19 15:21:05 UTC; martanairuscone
 Author: Marta Nai Ruscone [aut, cre],
   Laura Deldossi [aut],
   Cleve Moler [ctb] (LINPACK routines in src),
   Jack Dongarra [ctb] (LINPACK routines in src)
 Maintainer: Marta Nai Ruscone <marta.nairuscone@unige.it>
 Repository: CRAN
-Date/Publication: 2023-11-14 15:40:05 UTC
+Date/Publication: 2024-08-19 18:40:14 UTC
